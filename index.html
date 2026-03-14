@@ -120,7 +120,7 @@
       height: 100vh; height: 100dvh;
       display: flex; justify-content: center; align-items: flex-end;
     }
-    #scrollCanvas { display: block; width: 60%; max-width: 480px; height: 68vh; height: 68dvh; aspect-ratio: 1076 / 1924; object-fit: contain; }
+    #scrollCanvas { display: block; width: 75%; max-width: 520px; height: 72vh; height: 72dvh; aspect-ratio: 1076 / 1924; object-fit: contain; }
 
     /* ── MASKING ── */
     .text-bg { position: absolute; z-index: 10; top: 0; left: 0; right: 0; height: 32vh; height: 32dvh; background: var(--white); pointer-events: none; }
@@ -143,7 +143,7 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      #scrollCanvas { width: 72%; height: 60vh; height: 60dvh; aspect-ratio: 1076 / 1924; }
+      #scrollCanvas { width: 90%; height: 70vh; height: 70dvh; aspect-ratio: 1076 / 1924; }
       .text-bg { height: 34vh; height: 34dvh; }
       .gradient-veil { top: 34vh; top: 34dvh; height: 120px; }
       .text-slide { top: 80px; }
@@ -466,24 +466,51 @@
         curSec = ai;
       }
 
-      // ── Text animations ──
+      // ── Text animations (delayed: text lags 60 frames behind frames) ──
+      // Frames switch at section boundary, but text stays from the
+      // previous section for the first ~50% of the new section, then
+      // the new section's text fades in.
+      const TD = 0.50; // Text delay: ~60 of 121 frames
+
       texts.forEach((sl, i) => {
         let o = 0, ty = 60;
-        if (i === ai) {
-          if (i === 0) {
-            // Hero text: visible at top, exits late
-            if (sp < 0.80) { o = 1; ty = 0; }
-            else { const p = eIn((sp - 0.80) / 0.20); o = 1 - p; ty = -100 * p; }
-          } else if (i === N - 1) {
-            if (sp < 0.35) { const p = eOut(sp / 0.35); o = p; ty = 60 * (1 - p); }
-            else { o = 1; ty = 0; }
-          } else {
-            // Middle sections: enter → long hold → late exit
-            if (sp < 0.15) { const p = eOut(sp / 0.15); o = p; ty = 60 * (1 - p); }
-            else if (sp < 0.90) { o = 1; ty = 0; }
-            else { const p = eIn((sp - 0.90) / 0.10); o = 1 - p; ty = -100 * p; }
+
+        if (i === 0) {
+          // HERO text: visible in hero section, lingers into section 1
+          if (ai === 0) {
+            o = 1; ty = 0;
+          } else if (ai === 1 && sp < TD) {
+            const p = eIn(sp / TD);
+            o = 1 - p; ty = -100 * p;
+          }
+
+        } else if (i === N - 1) {
+          // CLOSER text: delayed entry, then stays
+          if (ai === i) {
+            if (sp >= TD) {
+              const local = sp - TD;
+              if (local < 0.15) { const p = eOut(local / 0.15); o = p; ty = 60 * (1 - p); }
+              else { o = 1; ty = 0; }
+            }
+          }
+
+        } else {
+          // MIDDLE sections (1–4): delayed entry in own section,
+          // lingers into next section for first 50%
+          if (ai === i) {
+            // In this section's scroll range
+            if (sp >= TD) {
+              const local = sp - TD;
+              if (local < 0.15) { const p = eOut(local / 0.15); o = p; ty = 60 * (1 - p); }
+              else { o = 1; ty = 0; }
+            }
+          } else if (ai === i + 1 && sp < TD) {
+            // This text lingers into the NEXT section's first half
+            const p = eIn(sp / TD);
+            o = 1 - p; ty = -100 * p;
           }
         }
+
         sl.style.opacity = o;
         sl.style.transform = `translateY(${ty}px)`;
       });
