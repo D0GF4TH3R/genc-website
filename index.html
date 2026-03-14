@@ -124,16 +124,12 @@
 
     /* ── MASKING ── */
     .text-bg { position: absolute; z-index: 10; top: 0; left: 0; right: 0; height: 32vh; height: 32dvh; background: var(--white); pointer-events: none; }
-    .gradient-veil {
-      position: absolute; z-index: 10; left: 0; right: 0; top: 32vh; top: 32dvh; height: 140px; pointer-events: none;
-      background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.92) 25%, rgba(255,255,255,0.65) 50%, rgba(255,255,255,0.3) 75%, rgba(255,255,255,0) 100%);
-    }
 
     /* ── SCROLL TRACK ── */
     .scroll-track { position: relative; z-index: 1; }
     .scroll-spacer { height: 180vh; }
     .scroll-spacer:first-child { height: 200vh; }
-    .scroll-spacer:last-child { height: 120vh; }
+    .scroll-spacer:last-child { height: 180vh; }
 
     /* ── FOOTER ── */
     .footer { position: relative; z-index: 30; text-align: center; padding: 40px 24px 48px; font-size: 0.85rem; color: #9CA3AF; background: var(--white); }
@@ -145,17 +141,15 @@
     @media (max-width: 768px) {
       #scrollCanvas { width: 90%; height: 70vh; height: 70dvh; aspect-ratio: 1076 / 1924; }
       .text-bg { height: 34vh; height: 34dvh; }
-      .gradient-veil { top: 34vh; top: 34dvh; height: 120px; }
       .text-slide { top: 80px; }
       .scroll-spacer { height: 150vh; }
       .scroll-spacer:first-child { height: 170vh; }
-      .scroll-spacer:last-child { height: 100vh; }
+      .scroll-spacer:last-child { height: 150vh; }
     }
     @media (min-width: 1025px) {
       #scrollCanvas { width: 38%; max-width: 500px; height: 70vh; height: 70dvh; aspect-ratio: 1076 / 1924; }
       .text-headline { font-size: 3rem; }
       .text-bg { height: 28vh; height: 28dvh; }
-      .gradient-veil { top: 28vh; top: 28dvh; }
       .text-slide { top: 100px; }
     }
   </style>
@@ -203,7 +197,6 @@
 
   <div class="display" id="display">
     <div class="text-bg"></div>
-    <div class="gradient-veil"></div>
 
     <div class="text-layer">
       <div class="text-slide" data-idx="0">
@@ -485,12 +478,15 @@
           }
 
         } else if (i === N - 1) {
-          // CLOSER text: delayed entry, then stays
+          // CLOSER text: enters right when previous text exits (at TD), fast fade
           if (ai === i) {
-            if (sp >= TD) {
-              const local = sp - TD;
-              if (local < 0.15) { const p = eOut(local / 0.15); o = p; ty = 60 * (1 - p); }
-              else { o = 1; ty = 0; }
+            if (sp < TD) {
+              // Soccer text still showing, closer hidden
+            } else if (sp < TD + 0.08) {
+              const p = eOut((sp - TD) / 0.08);
+              o = p; ty = 60 * (1 - p);
+            } else {
+              o = 1; ty = 0;
             }
           }
 
