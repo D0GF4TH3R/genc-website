@@ -19,8 +19,8 @@
       --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
     }
 
-    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    body { font-family: var(--font); background: var(--white); color: var(--black); overflow-x: hidden; }
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overscroll-behavior-y: none; }
+    body { font-family: var(--font); background: var(--white); color: var(--black); overflow-x: hidden; overscroll-behavior-y: none; }
 
     /* ── LOADING SCREEN ── */
     .loader-screen {
@@ -93,16 +93,16 @@
     /* ── WHATSAPP FLOAT ── */
     .wa-float {
       position: fixed; bottom: 24px; right: 20px; z-index: 100; width: 52px; height: 52px; border-radius: 50%;
-      background: #25D366; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 16px rgba(37,211,102,0.35), 0 2px 4px rgba(0,0,0,0.1);
+      background: var(--green); display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(45,106,79,0.35), 0 2px 4px rgba(0,0,0,0.1);
       text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
     }
-    .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(37,211,102,0.45), 0 2px 4px rgba(0,0,0,0.1); }
+    .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(45,106,79,0.45), 0 2px 4px rgba(0,0,0,0.1); }
     .wa-float svg { width: 28px; height: 28px; fill: #fff; }
 
     /* ── TEXT LAYER ── */
     .text-layer { position: absolute; top: 0; left: 0; right: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; }
-    .text-slide { position: absolute; top: 90px; left: 0; right: 0; text-align: center; padding: 0 24px; opacity: 0; transform: translateY(60px); will-change: transform, opacity; }
+    .text-slide { position: absolute; top: 140px; left: 0; right: 0; text-align: center; padding: 0 24px; opacity: 0; transform: translateY(60px); will-change: transform, opacity; }
     .text-headline { font-weight: 600; font-size: clamp(2rem, 6.5vw, 2.75rem); letter-spacing: -0.025em; line-height: 1.08; margin-bottom: 12px; }
     .text-body { font-size: clamp(0.9rem, 2.5vw, 1.05rem); line-height: 1.6; color: var(--grey); max-width: 460px; margin: 0 auto; }
     .btn-contact {
@@ -128,10 +128,9 @@
     /* ── SCROLL TRACK ── */
     .scroll-track { position: relative; z-index: 1; }
     .scroll-spacer { height: 180vh; }
-    .scroll-spacer:first-child { height: 200vh; }
+    .scroll-spacer:first-child { height: 130vh; }
     .scroll-spacer:last-child { height: 180vh; }
 
-    /* ── FOOTER ── */
 
     /* ── COLORS ── */
     .c-green { color: var(--green); } .c-blue { color: var(--blue); } .c-red { color: var(--red); } .c-orange { color: var(--orange); } .c-black { color: var(--black); }
@@ -140,16 +139,16 @@
     @media (max-width: 768px) {
       #scrollCanvas { width: 90%; height: 70vh; height: 70dvh; aspect-ratio: 1076 / 1924; }
       .text-bg { height: 34vh; height: 34dvh; }
-      .text-slide { top: 80px; }
+      .text-slide { top: 130px; }
       .scroll-spacer { height: 150vh; }
-      .scroll-spacer:first-child { height: 170vh; }
+      .scroll-spacer:first-child { height: 110vh; }
       .scroll-spacer:last-child { height: 150vh; }
     }
     @media (min-width: 1025px) {
       #scrollCanvas { width: 38%; max-width: 500px; height: 70vh; height: 70dvh; aspect-ratio: 1076 / 1924; }
       .text-headline { font-size: 3rem; }
       .text-bg { height: 28vh; height: 28dvh; }
-      .text-slide { top: 100px; }
+      .text-slide { top: 150px; }
     }
   </style>
 </head>
