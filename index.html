@@ -32,7 +32,7 @@
     .loader-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
     .loader-logo { height: 28px; margin-bottom: 32px; }
     .loader-bar-track { width: 120px; height: 2px; background: #E5E7EB; border-radius: 2px; overflow: hidden; }
-    .loader-bar-fill { height: 100%; background: var(--green); border-radius: 2px; width: 0%; transition: width 0.15s ease; }
+    .loader-bar-fill { height: 100%; background: #0071E3; border-radius: 2px; width: 0%; transition: width 0.15s ease; }
     .loader-pct { margin-top: 12px; font-size: 0.75rem; color: #9CA3AF; font-variant-numeric: tabular-nums; }
 
     /* ── FIXED DISPLAY LAYER ── */
@@ -76,7 +76,7 @@
     }
     .menu-overlay.open { opacity: 1; pointer-events: auto; }
     .menu-section { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-bottom: 32px; }
-    .menu-link { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; text-decoration: none; color: var(--black); padding: 8px 0; transition: color 0.2s; }
+    .menu-link { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.01em; text-decoration: none; color: var(--black); padding: 8px 0; transition: color 0.2s; font-family: var(--font); }
     .menu-link:hover { color: var(--green); }
     .menu-link.green { color: var(--green); }
     .menu-divider { width: 40px; height: 1px; background: #E5E7EB; margin: 8px 0 24px; }
@@ -96,7 +96,7 @@
     }
     .legal-modal.open { opacity: 1; pointer-events: auto; }
     .legal-modal-inner {
-      max-width: 600px; margin: 0 auto; padding: 80px 24px 80px;
+      max-width: 600px; margin: 0 auto; padding: 80px 24px 80px; font-family: var(--font);
     }
     .legal-close {
       position: fixed; top: 16px; right: 20px; z-index: 310;
@@ -118,11 +118,11 @@
     /* ── WHATSAPP FLOAT ── */
     .wa-float {
       position: fixed; bottom: 24px; right: 20px; z-index: 100; width: 52px; height: 52px; border-radius: 50%;
-      background: var(--green); display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 16px rgba(45,106,79,0.35), 0 2px 4px rgba(0,0,0,0.1);
+      background: #0071E3; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,113,227,0.35), 0 2px 4px rgba(0,0,0,0.1);
       text-decoration: none; transition: transform 0.2s, box-shadow 0.2s;
     }
-    .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(45,106,79,0.45), 0 2px 4px rgba(0,0,0,0.1); }
+    .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(0,113,227,0.45), 0 2px 4px rgba(0,0,0,0.1); }
     .wa-float svg { width: 28px; height: 28px; fill: #fff; }
 
     /* ── TEXT LAYER ── */
@@ -139,18 +139,18 @@
       -webkit-background-clip: text !important;
       background-clip: text !important;
       -webkit-text-fill-color: transparent;
-      background-size: 200% 100%;
+      background-size: 300% 100%;
       background-position: 100% 0;
     }
     .text-body { font-size: clamp(0.9rem, 2.5vw, 1.05rem); line-height: 1.6; color: var(--grey); max-width: 460px; margin: 0 auto; }
     .btn-contact {
       display: inline-flex; align-items: center; padding: 13px 34px;
-      background: var(--green); color: #fff; font-family: var(--font);
+      background: #0071E3; color: #fff; font-family: var(--font);
       font-size: 0.95rem; font-weight: 600; border-radius: 9999px;
       text-decoration: none; border: none; cursor: pointer;
       transition: background 0.2s, transform 0.15s; margin-top: 12px;
     }
-    .btn-contact:hover { background: #245840; transform: scale(1.02); }
+    .btn-contact:hover { background: #0077ED; transform: scale(1.02); }
 
     /* ── CANVAS LAYER ── */
     .canvas-layer {
@@ -501,7 +501,7 @@
     document.querySelectorAll('.text-headline[data-grad]').forEach(el => {
       const gi = parseInt(el.dataset.grad);
       const g = GRADS[gi];
-      el.style.backgroundImage = `linear-gradient(90deg, ${g[0]} 0%, ${g[1]} 16.5%, ${g[2]} 33%, ${g[3]} 44%, #111 56%, #111 100%)`;
+      el.style.backgroundImage = `linear-gradient(90deg, #111 0%, #111 29%, ${g[0]} 36%, ${g[1]} 46%, ${g[2]} 56%, ${g[3]} 65%, #111 72%, #111 100%)`;
       gradHeadlines[gi] = el;
     });
 
@@ -721,12 +721,22 @@
           : (ai === gi && sp >= TD + 0.15);
 
         if (visible) {
+          if (gradState[gi] >= 2) gradState[gi] = 0; // reset after full exit
           gradState[gi] = Math.min(gradState[gi] + GRAD_SPEED, 1);
         } else if (ai !== gi) {
-          gradState[gi] = Math.max(gradState[gi] - FADE_SPEED, 0);
+          if (gradState[gi] > 0 && gradState[gi] < 1) {
+            gradState[gi] = Math.max(gradState[gi] - GRAD_SPEED, 0); // interrupted entry
+          } else if (gradState[gi] >= 1 && gradState[gi] < 2) {
+            gradState[gi] = Math.min(gradState[gi] + FADE_SPEED, 2); // exit: black from left
+          }
         }
-        const eased = eOut(gradState[gi]);
-        el.style.backgroundPosition = `${(1 - eased) * 100}% 0`;
+        let pos;
+        if (gradState[gi] <= 1) {
+          pos = 100 - eOut(gradState[gi]) * 50; // entry: 100%→50%
+        } else {
+          pos = 50 - eOut(gradState[gi] - 1) * 50; // exit: 50%→0%
+        }
+        el.style.backgroundPosition = `${pos}% 0`;
       }
 
       requestAnimationFrame(tick);
