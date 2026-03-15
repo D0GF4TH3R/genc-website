@@ -135,6 +135,13 @@
     .text-slide[data-idx="1"] { top: 95px; }
     .text-slide[data-idx="5"] { top: 130px; }
     .text-headline { font-weight: 600; font-size: clamp(2rem, 6.5vw, 2.75rem); letter-spacing: -0.025em; line-height: 1.08; margin-bottom: 12px; }
+    .text-headline[data-grad] {
+      -webkit-background-clip: text !important;
+      background-clip: text !important;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 100%;
+      background-position: 100% 0;
+    }
     .text-body { font-size: clamp(0.9rem, 2.5vw, 1.05rem); line-height: 1.6; color: var(--grey); max-width: 460px; margin: 0 auto; }
     .btn-contact {
       display: inline-flex; align-items: center; padding: 13px 34px;
@@ -318,24 +325,24 @@
 
     <div class="text-layer">
       <div class="text-slide" data-idx="0">
-        <h1 class="text-headline c-black" data-i18n-html="hero_headline">Your Body.<br>Your Gym.</h1>
+        <h1 class="text-headline" data-grad="0" data-i18n-html="hero_headline">Your Body.<br>Your Gym.</h1>
         <p class="text-body" data-i18n-html="hero_body">Bespoke training, physio &amp; massage.<br>Swiss precision, delivered to your door.</p>
         <a href="https://wa.me/41765687707?text=Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="btn-contact wa-link" target="_blank" rel="noopener" data-i18n="cta">Contact Me</a>
       </div>
       <div class="text-slide" data-idx="1">
-        <h2 class="text-headline c-green" data-i18n-html="training_headline">Your gym<br>comes to you.</h2>
+        <h2 class="text-headline" data-grad="1" data-i18n-html="training_headline">Your gym<br>comes to you.</h2>
         <p class="text-body" data-i18n="training_body">Bespoke in-home training that combines workouts, physio, and sports massage — all in one session. No gym. No commute. Just results.</p>
       </div>
       <div class="text-slide" data-idx="2">
-        <h2 class="text-headline c-blue" data-i18n-html="physio_headline">Fix it. Move better.</h2>
+        <h2 class="text-headline" data-grad="2" data-i18n-html="physio_headline">Fix it. Move better.</h2>
         <p class="text-body" data-i18n="physio_body">Swiss-certified physiotherapy that releases blockages, restores mobility, and builds long-term resilience — at your home.</p>
       </div>
       <div class="text-slide" data-idx="3">
-        <h2 class="text-headline c-red" data-i18n-html="massage_headline">Recovery is<br>the strategy.</h2>
+        <h2 class="text-headline" data-grad="3" data-i18n-html="massage_headline">Recovery is<br>the strategy.</h2>
         <p class="text-body" data-i18n="massage_body">Deep-tissue sports massage that releases tension, accelerates recovery, and prepares your body for what's next.</p>
       </div>
       <div class="text-slide" data-idx="4">
-        <h2 class="text-headline c-orange" data-i18n="soccer_headline">Trained by a pro.</h2>
+        <h2 class="text-headline" data-grad="4" data-i18n="soccer_headline">Trained by a pro.</h2>
         <p class="text-body" data-i18n="soccer_body">Tactics, speed, and ball control — coached by a former Swiss professional footballer. Sessions that sharpen every aspect of your game.</p>
       </div>
       <div class="text-slide" data-idx="5">
@@ -381,6 +388,17 @@
     const FRAME_COUNT = 121;   // Verify after extraction — adjust if videos differ
     const HERO_FPS = 24;
 
+    // ── Gradient text colors (Apple Intelligence style sweep)
+    const GRADS = [
+      ['#2ea8ff','#b258ff','#ff3b7c','#ff8e25'],  // 0: Hero — Apple
+      ['#00f2fe','#4facfe','#f093fb','#f5576c'],  // 1: Training — Cyberpunk
+      ['#11998e','#38ef7d','#0eb2c0','#7b2ff7'],  // 2: Physio — Aurora
+      ['#fee140','#fa709a','#bf089a','#2a0845'],  // 3: Massage — Sunset
+      ['#84fab0','#8fd3f4','#d399c1','#ff4b1f'],  // 4: Soccer — Berry
+    ];
+    const gradState = [0, 0, 0, 0, 0];  // 0→1 sweep progress per section
+    const GRAD_SPEED = 0.025;            // per frame (~40 frames = ~0.66s at 60fps)
+
     const SECTIONS = [
       { key: 'hero',     folder: 'frames/hero/'     },
       { key: 'training', folder: 'frames/training/' },
@@ -404,6 +422,15 @@
     const texts   = document.querySelectorAll('.text-slide');
     const spacers = document.querySelectorAll('.scroll-spacer');
     const N       = spacers.length;
+
+    // ── Cache gradient headlines + set initial background
+    const gradHeadlines = [];
+    document.querySelectorAll('.text-headline[data-grad]').forEach(el => {
+      const gi = parseInt(el.dataset.grad);
+      const g = GRADS[gi];
+      el.style.backgroundImage = `linear-gradient(90deg, ${g[0]} 0%, ${g[1]} 16.5%, ${g[2]} 33%, ${g[3]} 50%, #111 50%, #111 100%)`;
+      gradHeadlines[gi] = el;
+    });
 
     // ── Frame path helper
     const pad = n => String(n).padStart(4, '0');
@@ -612,6 +639,25 @@
         sl.style.transform = `translateY(${ty}px)`;
       });
 
+      // ── Gradient text sweep (Apple Intelligence style)
+      for (let gi = 0; gi < GRADS.length; gi++) {
+        const el = gradHeadlines[gi];
+        if (!el) continue;
+        // Is this headline's text currently fully visible?
+        const visible = (gi === 0)
+          ? (ai === 0 && heroDone)                       // Hero: after auto-play
+          : (ai === gi && sp >= TD + 0.15);              // Others: after text fade-in
+
+        if (visible) {
+          gradState[gi] = Math.min(gradState[gi] + GRAD_SPEED, 1);
+        } else if (ai !== gi) {
+          gradState[gi] = 0;  // Reset when section is off-screen
+        }
+        // Eased progress → background-position (100% = black, 0% = full gradient)
+        const eased = eOut(gradState[gi]);
+        el.style.backgroundPosition = `${(1 - eased) * 100}% 0`;
+      }
+
       requestAnimationFrame(tick);
     }
 
@@ -631,7 +677,7 @@
         const t = document.querySelector(a.getAttribute('href'));
         mOpen = false; mOvl.classList.remove('open'); mBtn.classList.remove('menu-open');
         document.body.style.overflow = '';
-        if (t) setTimeout(() => scrollTo({ top: t.offsetTop + t.offsetHeight - 2, behavior: 'smooth' }), 100);
+        if (t) setTimeout(() => scrollTo({ top: t.offsetTop, behavior: 'smooth' }), 100);
       };
     });
 
