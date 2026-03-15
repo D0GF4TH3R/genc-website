@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Genc — Your Body. Your Gym.</title>
+  <title>Genc Krasniqi — Your Body. Your Gym.</title>
   <meta name="description" content="Bespoke training, physio & massage. Swiss precision, delivered to your door in Dubai.">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,7 +30,7 @@
       transition: opacity 0.6s ease, visibility 0.6s ease;
     }
     .loader-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-    .loader-logo { font-weight: 700; font-size: 1.6rem; letter-spacing: -0.03em; color: var(--black); margin-bottom: 32px; }
+    .loader-logo { height: 20px; margin-bottom: 32px; }
     .loader-bar-track { width: 120px; height: 2px; background: #E5E7EB; border-radius: 2px; overflow: hidden; }
     .loader-bar-fill { height: 100%; background: var(--green); border-radius: 2px; width: 0%; transition: width 0.15s ease; }
     .loader-pct { margin-top: 12px; font-size: 0.75rem; color: #9CA3AF; font-variant-numeric: tabular-nums; }
@@ -45,17 +45,14 @@
 
     /* ── NAV ── */
     .nav-bar {
-      position: fixed; top: 12px; left: 16px; right: 16px; z-index: 200;
-      display: flex; align-items: center; justify-content: space-between; pointer-events: none;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; pointer-events: none;
     }
-    .nav-logo-pill {
-      display: inline-flex; align-items: center; padding: 10px 20px; border-radius: 9999px;
-      background: rgba(255,255,255,0.65); backdrop-filter: blur(40px) saturate(180%); -webkit-backdrop-filter: blur(40px) saturate(180%);
-      border: 1px solid rgba(255,255,255,0.5);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.03), inset 0 1px 0 rgba(255,255,255,0.6);
-      pointer-events: auto; text-decoration: none; color: var(--black);
+    .nav-logo {
+      pointer-events: auto; cursor: pointer; display: block;
+      height: 22px; width: auto;
     }
-    .nav-logo-pill span { font-weight: 700; font-size: 1.15rem; letter-spacing: -0.02em; }
 
     .hamburger-btn {
       display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 9999px;
@@ -102,9 +99,12 @@
 
     /* ── TEXT LAYER ── */
     .text-layer { position: absolute; top: 0; left: 0; right: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; }
-    .text-slide { position: absolute; top: 140px; left: 0; right: 0; text-align: center; padding: 0 24px; opacity: 0; transform: translateY(60px); will-change: transform, opacity; }
-    .text-slide[data-idx="0"] { top: 90px; }
-    .text-slide[data-idx="1"] { top: 120px; }
+    .text-slide {
+      position: absolute; top: 80px; left: 0; right: 0; text-align: center; padding: 0 24px;
+      opacity: 0; transform: translateY(60px); will-change: transform, opacity;
+    }
+    .text-slide[data-idx="0"] { top: 70px; }
+    .text-slide[data-idx="1"] { top: 75px; }
     .text-headline { font-weight: 600; font-size: clamp(2rem, 6.5vw, 2.75rem); letter-spacing: -0.025em; line-height: 1.08; margin-bottom: 12px; }
     .text-body { font-size: clamp(0.9rem, 2.5vw, 1.05rem); line-height: 1.6; color: var(--grey); max-width: 460px; margin: 0 auto; }
     .btn-contact {
@@ -122,57 +122,74 @@
       height: 100vh; height: 100dvh;
       display: flex; justify-content: center; align-items: flex-end;
     }
-    #scrollCanvas { display: block; width: 75%; max-width: 520px; height: 72vh; height: 72dvh; aspect-ratio: 1076 / 1924; object-fit: contain; }
+    #scrollCanvas {
+      display: block;
+      width: 100%;
+      height: 64vh; height: 64dvh;
+      aspect-ratio: 1292 / 1604;
+    }
 
-    /* ── MASKING ── */
-    .text-bg { position: absolute; z-index: 10; top: 0; left: 0; right: 0; height: 32vh; height: 32dvh; background: var(--white); pointer-events: none; }
+    /* ── MASKING — white overlay covering top portion above canvas content ── */
+    .text-bg {
+      position: absolute; z-index: 10; top: 0; left: 0; right: 0;
+      height: 36vh; height: 36dvh;
+      background: var(--white); pointer-events: none;
+    }
 
     /* ── SCROLL TRACK ── */
     .scroll-track { position: relative; z-index: 1; }
-    .scroll-spacer { height: 180vh; }
-    .scroll-spacer:first-child { height: 130vh; }
-    .scroll-spacer:last-child { height: 180vh; }
-
+    .scroll-spacer { height: 150vh; }
+    .scroll-spacer:first-child { height: 110vh; }
+    .scroll-spacer:last-child { height: 150vh; }
 
     /* ── COLORS ── */
     .c-green { color: var(--green); } .c-blue { color: var(--blue); } .c-red { color: var(--red); } .c-orange { color: var(--orange); } .c-black { color: var(--black); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      #scrollCanvas { width: 90%; height: 70vh; height: 70dvh; aspect-ratio: 1076 / 1924; }
-      .text-bg { height: 34vh; height: 34dvh; }
-      .text-slide { top: 130px; }
-      .text-slide[data-idx="0"] { top: 80px; }
-      .text-slide[data-idx="1"] { top: 115px; }
-      .scroll-spacer { height: 150vh; }
-      .scroll-spacer:first-child { height: 110vh; }
-      .scroll-spacer:last-child { height: 150vh; }
+    /* ── RESPONSIVE: Tablet (769px – 1024px) ── */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      #scrollCanvas { width: 75%; height: 68dvh; max-width: 600px; }
+      .text-bg { height: 32dvh; }
+      .text-slide { top: 100px; }
+      .text-slide[data-idx="0"] { top: 90px; }
+      .text-slide[data-idx="1"] { top: 95px; }
+      .scroll-spacer { height: 170vh; }
+      .scroll-spacer:first-child { height: 120vh; }
+      .scroll-spacer:last-child { height: 170vh; }
     }
+
+    /* ── RESPONSIVE: Desktop (1025px+) ── */
     @media (min-width: 1025px) {
-      #scrollCanvas { width: 38%; max-width: 500px; height: 70vh; height: 70dvh; aspect-ratio: 1076 / 1924; }
+      .nav-logo { height: 26px; }
+      #scrollCanvas { width: 50%; max-width: 560px; height: 72dvh; }
       .text-headline { font-size: 3rem; }
-      .text-bg { height: 28vh; height: 28dvh; }
-      .text-slide { top: 150px; }
+      .text-bg { height: 28dvh; }
+      .text-slide { top: 120px; }
       .text-slide[data-idx="0"] { top: 100px; }
-      .text-slide[data-idx="1"] { top: 130px; }
+      .text-slide[data-idx="1"] { top: 110px; }
+      .scroll-spacer { height: 180vh; }
+      .scroll-spacer:first-child { height: 130vh; }
+      .scroll-spacer:last-child { height: 180vh; }
     }
   </style>
 </head>
 <body>
 
+  <!-- ── LOADER ── -->
   <div class="loader-screen" id="loaderScreen">
-    <div class="loader-logo">Genc</div>
+    <img src="GK_Logo.png" alt="GK Elite Training" class="loader-logo">
     <div class="loader-bar-track"><div class="loader-bar-fill" id="loaderFill"></div></div>
     <div class="loader-pct" id="loaderPct">0 %</div>
   </div>
 
+  <!-- ── NAV ── -->
   <div class="nav-bar">
-    <a href="#" class="nav-logo-pill" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;"><span>Genc</span></a>
+    <img src="GK_Logo.png" alt="GK Elite Training" class="nav-logo" id="navLogo">
     <button class="hamburger-btn" id="menuToggle" aria-label="Menu">
       <div class="hamburger-icon"><span></span><span></span><span></span></div>
     </button>
   </div>
 
+  <!-- ── FULLSCREEN MENU ── -->
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-section">
       <a href="#s-training" class="menu-link" data-menu-nav>Training</a>
@@ -195,10 +212,12 @@
     </div>
   </div>
 
+  <!-- ── WHATSAPP FLOAT ── -->
   <a href="https://wa.me/PHONENUMBER?text=Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
+  <!-- ── FIXED DISPLAY LAYER ── -->
   <div class="display" id="display">
     <div class="text-bg"></div>
 
@@ -235,6 +254,7 @@
     </div>
   </div>
 
+  <!-- ── SCROLL TRACK ── -->
   <div class="scroll-track">
     <div class="scroll-spacer" id="s-hero" data-section="0"></div>
     <div class="scroll-spacer" id="s-training" data-section="1"></div>
@@ -252,20 +272,19 @@
     /* ============================================================
        GENC — Scroll-Driven Frame Animation + Hero Auto-Play
        ============================================================
-       Hero (section 0): Auto-plays at 24fps on page load like a
-       video. Genc turns to camera. After it finishes, the last
-       frame freezes and scrolling is unlocked.
+       Hero (section 0): Auto-plays at 24fps on page load.
+       Genc turns to camera. After it finishes, the last frame
+       freezes and scrolling is unlocked.
 
        Sections 1–5: Scroll-driven frame scrubbing (Apple-style).
-       User scrolls = user scrubs through frames on canvas.
 
        6 sections × 121 WebP frames = 726 total
-       Original: 1076×1924 @ 24fps, ~5s per video
-       Frames: h:1000, WebP q80, ~13-17KB each, ~12 MB total
+       Source: 1292×1604 @ 24fps, ~5s per video
+       Frames: h:1000, WebP q80
        ============================================================ */
 
-    const FRAME_COUNT = 121;
-    const HERO_FPS = 24; // Playback speed for hero auto-play
+    const FRAME_COUNT = 121;   // Verify after extraction — adjust if videos differ
+    const HERO_FPS = 24;
 
     const SECTIONS = [
       { key: 'hero',     folder: 'frames/hero/'     },
@@ -279,8 +298,8 @@
     const allFrames = SECTIONS.map(() => []);
     const sectionLoaded = SECTIONS.map(() => false);
     let curSec = -1, curFrame = -1, isReady = false;
-    let heroPlaying = false;  // true while hero auto-plays
-    let heroDone = false;     // true after hero animation finished
+    let heroPlaying = false;
+    let heroDone = false;
 
     const canvas  = document.getElementById('scrollCanvas');
     const ctx     = canvas.getContext('2d');
@@ -318,42 +337,38 @@
       });
     }
 
-    // ── Hero auto-play animation (plays once like a video)
+    // ── Hero auto-play animation
     function playHero() {
       return new Promise(resolve => {
         const frames = allFrames[0];
         if (!frames.length) { resolve(); return; }
 
         heroPlaying = true;
-        document.body.style.overflow = 'hidden'; // Lock scroll during intro
+        document.body.style.overflow = 'hidden';
         window.scrollTo(0, 0);
 
         let frameIdx = 0;
-        const interval = 1000 / HERO_FPS; // ~41.67ms per frame at 24fps
+        const interval = 1000 / HERO_FPS;
         let lastTime = performance.now();
 
         function animate(now) {
           const delta = now - lastTime;
-
           if (delta >= interval) {
-            lastTime = now - (delta % interval); // Correct for drift
+            lastTime = now - (delta % interval);
             draw(frames[frameIdx]);
             frameIdx++;
           }
-
           if (frameIdx < frames.length) {
             requestAnimationFrame(animate);
           } else {
-            // Hero animation complete — freeze on last frame
             draw(frames[frames.length - 1]);
             heroPlaying = false;
             heroDone = true;
-            document.body.style.overflow = ''; // Unlock scroll
+            document.body.style.overflow = '';
             resolve();
           }
         }
 
-        // Draw first frame immediately, then start animation
         draw(frames[0]);
         requestAnimationFrame(animate);
       });
@@ -361,28 +376,23 @@
 
     // ── Loading sequence
     async function boot() {
-      // Phase 1: Load hero frames with progress bar
       await preload(0, (d, t) => {
         const p = Math.round(d / t * 100);
         fill.style.width = p + '%';
         pctEl.textContent = p + ' %';
       });
 
-      // Hide loader, show hero text
       loader.classList.add('hidden');
       texts[0].style.opacity = 1;
       texts[0].style.transform = 'translateY(0)';
 
-      // Phase 2: Auto-play hero animation (Genc turns to camera)
       await playHero();
 
-      // Phase 3: Now scroll-driven mode is active
       isReady = true;
       curSec = 0;
-      curFrame = allFrames[0].length - 1; // We're on last hero frame
+      curFrame = allFrames[0].length - 1;
       requestAnimationFrame(tick);
 
-      // Phase 4: Background-load remaining sections
       for (let i = 1; i < SECTIONS.length; i++) await preload(i);
     }
 
@@ -417,7 +427,7 @@
     const eOut = t => 1 - (1 - t) ** 3;
     const eIn  = t => t ** 3;
 
-    // ── Main scroll-driven loop (runs AFTER hero auto-play is done)
+    // ── Main scroll-driven loop
     function tick() {
       if (!isReady) { requestAnimationFrame(tick); return; }
 
@@ -432,28 +442,23 @@
       }
       sp = Math.max(0, Math.min(1, sp));
 
-      // ── Canvas frame ──
+      // ── Canvas frame
       if (ai === 0) {
-        // HERO SECTION: Always show last hero frame (it already played)
         const heroFrames = allFrames[0];
         if (heroFrames.length) {
           const lastIdx = heroFrames.length - 1;
           if (curSec !== 0 || curFrame !== lastIdx) {
             draw(heroFrames[lastIdx]);
-            curSec = 0;
-            curFrame = lastIdx;
+            curSec = 0; curFrame = lastIdx;
           }
         }
       } else if (sectionLoaded[ai] && allFrames[ai].length) {
-        // SECTIONS 1–5: Scroll-driven frame scrubbing
         const fr = allFrames[ai];
         const fi = Math.min(Math.floor(sp * fr.length), fr.length - 1);
         if (fi !== curFrame || ai !== curSec) {
-          draw(fr[fi]);
-          curFrame = fi; curSec = ai;
+          draw(fr[fi]); curFrame = fi; curSec = ai;
         }
       } else if (ai !== curSec) {
-        // Section not loaded yet — show nearest neighbor's edge frame
         for (let d = 1; d < N; d++) {
           if (ai - d >= 0 && sectionLoaded[ai - d]) {
             const f = allFrames[ai - d]; draw(f[f.length - 1]); break;
@@ -465,51 +470,33 @@
         curSec = ai;
       }
 
-      // ── Text animations (delayed: text lags 60 frames behind frames) ──
-      // Frames switch at section boundary, but text stays from the
-      // previous section for the first ~50% of the new section, then
-      // the new section's text fades in.
-      const TD = 0.50; // Text delay: ~60 of 121 frames
+      // ── Text animations (delayed: text lags ~60 frames behind)
+      const TD = 0.50;
 
       texts.forEach((sl, i) => {
         let o = 0, ty = 60;
 
         if (i === 0) {
-          // HERO text: visible in hero section, lingers into section 1
-          if (ai === 0) {
-            o = 1; ty = 0;
-          } else if (ai === 1 && sp < TD) {
-            const p = eIn(sp / TD);
-            o = 1 - p; ty = -100 * p;
+          if (ai === 0) { o = 1; ty = 0; }
+          else if (ai === 1 && sp < TD) {
+            const p = eIn(sp / TD); o = 1 - p; ty = -100 * p;
           }
-
         } else if (i === N - 1) {
-          // CLOSER text: enters right when previous text exits (at TD), fast fade
           if (ai === i) {
-            if (sp < TD) {
-              // Soccer text still showing, closer hidden
-            } else if (sp < TD + 0.08) {
-              const p = eOut((sp - TD) / 0.08);
-              o = p; ty = 60 * (1 - p);
-            } else {
-              o = 1; ty = 0;
+            if (sp >= TD + 0.08) { o = 1; ty = 0; }
+            else if (sp >= TD) {
+              const p = eOut((sp - TD) / 0.08); o = p; ty = 60 * (1 - p);
             }
           }
-
         } else {
-          // MIDDLE sections (1–4): delayed entry in own section,
-          // lingers into next section for first 50%
           if (ai === i) {
-            // In this section's scroll range
             if (sp >= TD) {
               const local = sp - TD;
               if (local < 0.15) { const p = eOut(local / 0.15); o = p; ty = 60 * (1 - p); }
               else { o = 1; ty = 0; }
             }
           } else if (ai === i + 1 && sp < TD) {
-            // This text lingers into the NEXT section's first half
-            const p = eIn(sp / TD);
-            o = 1 - p; ty = -100 * p;
+            const p = eIn(sp / TD); o = 1 - p; ty = -100 * p;
           }
         }
 
@@ -540,18 +527,21 @@
       };
     });
 
+    // ── Nav logo click → scroll to top
+    document.getElementById('navLogo').onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
     // ── Resize
     onresize = () => {
       sizeCanvas();
-      if (heroPlaying) return; // Don't interfere with auto-play
+      if (heroPlaying) return;
       if (curSec >= 0 && sectionLoaded[curSec] && curFrame >= 0) {
         draw(allFrames[curSec][curFrame]);
       }
     };
 
     // ── Go
-    history.scrollRestoration = 'manual'; // Prevent browser restoring old scroll pos
-    window.scrollTo(0, 0);               // Force top on every load
+    history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
     sizeCanvas();
     boot();
   </script>
