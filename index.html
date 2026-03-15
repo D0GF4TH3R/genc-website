@@ -87,6 +87,34 @@
     .lang-btn.active { color: var(--black); }
     .lang-btn:hover { color: var(--black); }
 
+    /* ── LEGAL MODALS ── */
+    .legal-modal {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 300;
+      background: var(--white);
+      overflow-y: auto; -webkit-overflow-scrolling: touch;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+    }
+    .legal-modal.open { opacity: 1; pointer-events: auto; }
+    .legal-modal-inner {
+      max-width: 600px; margin: 0 auto; padding: 80px 24px 80px;
+    }
+    .legal-close {
+      position: fixed; top: 16px; right: 20px; z-index: 310;
+      width: 44px; height: 44px; border-radius: 9999px;
+      background: rgba(255,255,255,0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(0,0,0,0.06);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .legal-close svg { width: 18px; height: 18px; stroke: var(--black); stroke-width: 2; }
+    .legal-title { font-weight: 600; font-size: 1.6rem; letter-spacing: -0.02em; margin-bottom: 32px; }
+    .legal-section { margin-bottom: 28px; }
+    .legal-section h3 { font-weight: 600; font-size: 0.95rem; margin-bottom: 8px; }
+    .legal-section p { font-size: 0.88rem; line-height: 1.7; color: var(--grey); }
+    .legal-section a { color: var(--green); text-decoration: none; }
+    .legal-section a:hover { text-decoration: underline; }
+    .legal-copyright { margin-top: 48px; padding-top: 24px; border-top: 1px solid #E5E7EB; font-size: 0.8rem; color: #9CA3AF; }
+
     /* ── WHATSAPP FLOAT ── */
     .wa-float {
       position: fixed; bottom: 24px; right: 20px; z-index: 100; width: 52px; height: 52px; border-radius: 50%;
@@ -217,17 +245,33 @@
     </div>
     <div class="menu-divider"></div>
     <div class="menu-section">
-      <a href="https://wa.me/PHONENUMBER?text=Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="menu-link green wa-link" target="_blank" rel="noopener" data-i18n="cta">Contact Me</a>
+      <a href="https://wa.me/41765687707?text=Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="menu-link green wa-link" target="_blank" rel="noopener" data-i18n="cta">Contact Me</a>
     </div>
     <div class="menu-divider"></div>
     <div class="menu-section">
-      <a href="#impressum" class="menu-small-link">Impressum</a>
-      <a href="#datenschutz" class="menu-small-link">Datenschutz</a>
+      <a href="#" class="menu-small-link" onclick="openLegal('impressum');return false;">Impressum</a>
+      <a href="#" class="menu-small-link" onclick="openLegal('datenschutz');return false;" data-i18n="menu_datenschutz">Datenschutz</a>
       <div class="lang-toggle">
         <button class="lang-btn active" data-lang="en">EN</button>
         <button class="lang-btn" data-lang="de">DE</button>
       </div>
     </div>
+  </div>
+
+  <!-- ── IMPRESSUM MODAL ── -->
+  <div class="legal-modal" id="impressumModal">
+    <button class="legal-close" onclick="closeLegal('impressum')" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="legal-modal-inner" id="impressumContent"></div>
+  </div>
+
+  <!-- ── DATENSCHUTZ MODAL ── -->
+  <div class="legal-modal" id="datenschutzModal">
+    <button class="legal-close" onclick="closeLegal('datenschutz')" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="legal-modal-inner" id="datenschutzContent"></div>
   </div>
 
   <!-- ── SCROLL INDICATOR ── -->
@@ -236,7 +280,7 @@
   </div>
 
   <!-- ── WHATSAPP FLOAT ── -->
-  <a href="https://wa.me/PHONENUMBER?text=Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="wa-float wa-link" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <a href="https://wa.me/41765687707?text=Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="wa-float wa-link" target="_blank" rel="noopener" aria-label="WhatsApp">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
   </a>
 
@@ -248,7 +292,7 @@
       <div class="text-slide" data-idx="0">
         <h1 class="text-headline c-black" data-i18n-html="hero_headline">Your Body.<br>Your Gym.</h1>
         <p class="text-body" data-i18n-html="hero_body">Bespoke training, physio &amp; massage.<br>Swiss precision, delivered to your door.</p>
-        <a href="https://wa.me/PHONENUMBER?text=Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="btn-contact wa-link" target="_blank" rel="noopener" data-i18n="cta">Contact Me</a>
+        <a href="https://wa.me/41765687707?text=Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="btn-contact wa-link" target="_blank" rel="noopener" data-i18n="cta">Contact Me</a>
       </div>
       <div class="text-slide" data-idx="1">
         <h2 class="text-headline c-green" data-i18n-html="training_headline">Your gym<br>comes to you.</h2>
@@ -268,7 +312,7 @@
       </div>
       <div class="text-slide" data-idx="5">
         <h2 class="text-headline c-black" data-i18n="closer_headline">Ready when you are.</h2>
-        <a href="https://wa.me/PHONENUMBER?text=Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="btn-contact wa-link" target="_blank" rel="noopener" data-i18n="cta">Contact Me</a>
+        <a href="https://wa.me/41765687707?text=Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="btn-contact wa-link" target="_blank" rel="noopener" data-i18n="cta">Contact Me</a>
       </div>
     </div>
 
@@ -596,6 +640,7 @@
         soccer_headline: 'Trained by a pro.',
         soccer_body: 'Tactics, speed, and ball control — coached by a former Swiss professional footballer. Sessions that sharpen every aspect of your game.',
         closer_headline: 'Ready when you are.',
+        menu_datenschutz: 'Privacy Policy',
         wa_text: 'Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services.',
       },
       de: {
@@ -617,9 +662,78 @@
         soccer_headline: 'Trainiert vom Profi.',
         soccer_body: 'Taktik, Schnelligkeit und Ballkontrolle — gecoacht von einem ehemaligen Schweizer Profifussballer. Sessions, die jedes Element deines Spiels schärfen.',
         closer_headline: 'Bereit, wenn du es bist.',
+        menu_datenschutz: 'Datenschutz',
         wa_text: 'Hallo%20Genc%2C%20ich%20m%C3%B6chte%20gerne%20mehr%20%C3%BCber%20deine%20Services%20erfahren.',
       }
     };
+
+    // ── Legal page content (DE + EN)
+    const LEGAL = {
+      en: {
+        impressum: `
+          <h2 class="legal-title">Imprint</h2>
+          <div class="legal-section"><h3>Contact</h3><p>Genc Krasniqi<br>WhatsApp: <a href="https://wa.me/41765687707">+41 76 568 77 07</a><br>E-Mail: <a href="mailto:EMAIL_ADDRESS">EMAIL_ADDRESS</a></p></div>
+          <div class="legal-section"><h3>Authorised Representative</h3><p>Genc Krasniqi</p></div>
+          <div class="legal-section"><h3>Commercial Register Entry</h3><p>Registered company name: Krasniqi GK Elite Training and EMS<br>Company number: CHE-346.373.619<br>Commercial register: Canton of Zurich, Switzerland</p></div>
+          <div class="legal-section"><h3>Disclaimer</h3><p>The author assumes no liability for the accuracy, completeness or timeliness of the content provided. Liability claims against the author for material or immaterial damages arising from access to or use of the published information are excluded. All offers are non-binding. The author reserves the right to change, supplement or delete parts of the site or the entire offering without prior notice.</p></div>
+          <div class="legal-section"><h3>Liability for Links</h3><p>References and links to third-party websites are beyond our control. We accept no responsibility for such websites. Access and use of such websites is at the user's own risk.</p></div>
+          <div class="legal-section"><h3>Copyright</h3><p>The copyright and all other rights to content, images, photos or other files on this website belong exclusively to Genc Krasniqi or the specifically named rights holders. Written consent of the copyright holder must be obtained in advance for the reproduction of any elements.</p></div>
+          <div class="legal-copyright">&copy; ${new Date().getFullYear()} Genc Krasniqi. All rights reserved.</div>`,
+
+        datenschutz: `
+          <h2 class="legal-title">Privacy Policy</h2>
+          <div class="legal-section"><h3>1. General</h3><p>GK Elite Training respects the privacy of all users of this website. This privacy policy explains what data is collected and how it is used. GK Elite Training complies with applicable data protection regulations and processes personal data only for the purposes for which it was provided.</p></div>
+          <div class="legal-section"><h3>2. Data Collection</h3><p>This website does not use cookies, tracking tools, analytics services, or any form of automated data collection. No personal data such as name, address, phone number or email address is collected automatically. Personal data is only processed when you voluntarily contact us via WhatsApp or email.</p></div>
+          <div class="legal-section"><h3>3. Hosting</h3><p>This website is hosted on GitHub Pages. GitHub may collect technical access data (such as IP address, browser type, access time) in server log files. This data is not linked to any personal information and is processed by GitHub in accordance with their privacy policy.</p></div>
+          <div class="legal-section"><h3>4. WhatsApp Communication</h3><p>When you contact us via WhatsApp, your message and phone number are processed through WhatsApp (Meta Platforms, Inc.). WhatsApp's own privacy policy applies to this communication. We use the information you provide solely to respond to your enquiry.</p></div>
+          <div class="legal-section"><h3>5. Data Sharing</h3><p>Your personal data will not be shared with third parties unless you have given your consent, or we are legally obligated to do so.</p></div>
+          <div class="legal-section"><h3>6. Your Rights</h3><p>You have the right to request information about, correction of, or deletion of your personal data at any time. Please contact us via WhatsApp or email for any such requests.</p></div>
+          <div class="legal-section"><h3>7. Changes</h3><p>This privacy policy may be updated from time to time. The current version published on this website shall apply with each new visit.</p></div>
+          <div class="legal-copyright">&copy; ${new Date().getFullYear()} Genc Krasniqi. All rights reserved.</div>`
+      },
+      de: {
+        impressum: `
+          <h2 class="legal-title">Impressum</h2>
+          <div class="legal-section"><h3>Kontaktadresse</h3><p>Genc Krasniqi<br>WhatsApp: <a href="https://wa.me/41765687707">+41 76 568 77 07</a><br>E-Mail: <a href="mailto:EMAIL_ADDRESS">EMAIL_ADDRESS</a></p></div>
+          <div class="legal-section"><h3>Vertretungsberechtigte Person</h3><p>Genc Krasniqi</p></div>
+          <div class="legal-section"><h3>Handelsregistereintrag</h3><p>Eingetragener Firmenname: Krasniqi GK Elite Training and EMS<br>Firmennummer: CHE-346.373.619<br>Handelsregisteramt: Kanton Zürich</p></div>
+          <div class="legal-section"><h3>Haftungsausschluss</h3><p>Der Autor übernimmt keinerlei Gewähr hinsichtlich der inhaltlichen Richtigkeit, Genauigkeit, Aktualität, Zuverlässigkeit und Vollständigkeit der Informationen. Haftungsansprüche gegen den Autor wegen Schäden materieller oder immaterieller Art, welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der veröffentlichten Informationen entstanden sind, werden ausgeschlossen. Alle Angebote sind unverbindlich. Der Autor behält es sich ausdrücklich vor, Teile der Seiten oder das gesamte Angebot ohne gesonderte Ankündigung zu verändern, zu ergänzen, zu löschen oder die Veröffentlichung zeitweise oder endgültig einzustellen.</p></div>
+          <div class="legal-section"><h3>Haftung für Links</h3><p>Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres Verantwortungsbereichs. Es wird jegliche Verantwortung für solche Webseiten abgelehnt. Der Zugriff und die Nutzung solcher Webseiten erfolgen auf eigene Gefahr des Nutzers.</p></div>
+          <div class="legal-section"><h3>Urheberrechte</h3><p>Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien auf der Website gehören ausschliesslich Genc Krasniqi oder den speziell genannten Rechtsinhabern. Für die Reproduktion jeglicher Elemente ist die schriftliche Zustimmung der Urheberrechtsträger im Voraus einzuholen.</p></div>
+          <div class="legal-copyright">&copy; ${new Date().getFullYear()} Genc Krasniqi. Alle Rechte vorbehalten.</div>`,
+
+        datenschutz: `
+          <h2 class="legal-title">Datenschutz</h2>
+          <div class="legal-section"><h3>1. Allgemeines</h3><p>GK Elite Training respektiert die Privatsphäre aller Nutzer dieser Webseite. Diese Datenschutzbestimmungen erläutern, welche Daten erhoben und wie sie verwendet werden. GK Elite Training hält die geltenden Datenschutzrechte ein und verarbeitet Personendaten einzig zu den Zwecken, für welche die Daten übermittelt wurden.</p></div>
+          <div class="legal-section"><h3>2. Datenerfassung</h3><p>Diese Webseite verwendet keine Cookies, keine Tracking-Tools, keine Analysedienste und keine Form der automatisierten Datenerhebung. Personenbezogene Daten wie Name, Adresse, Telefonnummer oder E-Mail-Adresse werden nicht automatisch erfasst. Personendaten werden ausschliesslich verarbeitet, wenn Sie uns freiwillig über WhatsApp oder E-Mail kontaktieren.</p></div>
+          <div class="legal-section"><h3>3. Hosting</h3><p>Diese Webseite wird auf GitHub Pages gehostet. GitHub kann technische Zugriffsdaten (wie IP-Adresse, Browsertyp, Zugriffszeit) in Server-Logfiles erfassen. Diese Daten werden nicht mit personenbezogenen Informationen verknüpft und von GitHub gemäss deren Datenschutzerklärung verarbeitet.</p></div>
+          <div class="legal-section"><h3>4. WhatsApp-Kommunikation</h3><p>Wenn Sie uns über WhatsApp kontaktieren, werden Ihre Nachricht und Telefonnummer über WhatsApp (Meta Platforms, Inc.) verarbeitet. Für diese Kommunikation gilt die Datenschutzerklärung von WhatsApp. Wir verwenden die von Ihnen übermittelten Informationen ausschliesslich zur Beantwortung Ihrer Anfrage.</p></div>
+          <div class="legal-section"><h3>5. Weitergabe Ihrer Daten</h3><p>Ihre personenbezogenen Daten werden nicht an Dritte weitergegeben, es sei denn, Sie haben der Weitergabe zugestimmt oder wir sind gesetzlich dazu verpflichtet.</p></div>
+          <div class="legal-section"><h3>6. Ihre Rechte</h3><p>Sie haben jederzeit das Recht, Auskunft über Ihre gespeicherten Daten zu erhalten, deren Berichtigung oder Löschung zu verlangen. Bitte kontaktieren Sie uns hierfür über WhatsApp oder E-Mail.</p></div>
+          <div class="legal-section"><h3>7. Schlussbestimmungen</h3><p>Diese Datenschutzbestimmungen können von Zeit zu Zeit angepasst werden. Mit jedem neuen Besuch der Webseite gilt die jeweils aktuelle, abrufbare Version.</p></div>
+          <div class="legal-copyright">&copy; ${new Date().getFullYear()} Genc Krasniqi. Alle Rechte vorbehalten.</div>`
+      }
+    };
+
+    // ── Legal modal functions
+    function renderLegal() {
+      document.getElementById('impressumContent').innerHTML = LEGAL[curLang].impressum;
+      document.getElementById('datenschutzContent').innerHTML = LEGAL[curLang].datenschutz;
+    }
+
+    function openLegal(which) {
+      renderLegal();
+      mOpen = false; mOvl.classList.remove('open'); mBtn.classList.remove('menu-open');
+      const modal = document.getElementById(which + 'Modal');
+      modal.classList.add('open');
+      modal.scrollTop = 0;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLegal(which) {
+      document.getElementById(which + 'Modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
     let curLang = 'en';
 
@@ -645,7 +759,7 @@
       });
 
       // Update all WhatsApp links
-      const waBase = 'https://wa.me/PHONENUMBER?text=' + t.wa_text;
+      const waBase = 'https://wa.me/41765687707?text=' + t.wa_text;
       document.querySelectorAll('.wa-link').forEach(el => el.href = waBase);
 
       // Update lang toggle buttons
