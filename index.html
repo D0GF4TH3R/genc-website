@@ -631,7 +631,7 @@
         const t = document.querySelector(a.getAttribute('href'));
         mOpen = false; mOvl.classList.remove('open'); mBtn.classList.remove('menu-open');
         document.body.style.overflow = '';
-        if (t) setTimeout(() => scrollTo({ top: t.offsetTop, behavior: 'smooth' }), 100);
+        if (t) setTimeout(() => scrollTo({ top: t.offsetTop + t.offsetHeight - 2, behavior: 'smooth' }), 100);
       };
     });
 
