@@ -284,16 +284,13 @@
       50% { transform: translateY(6px); opacity: 1; }
     }
 
-    /* ── RESPONSIVE: Tablet Portrait (769px – 1024px) — Single column, scaled up ── */
+    /* ── RESPONSIVE: Tablet Portrait (769px – 1024px) — Same as mobile, scaled up ── */
     @media (min-width: 769px) and (max-width: 1024px) {
-      #scrollCanvas { width: 65%; height: 72svh; max-width: none; }
+      #scrollCanvas { width: 100%; height: 72svh; }
       .text-bg { height: 28svh; }
-      .text-slide { top: 100px; }
-      .text-slide[data-idx="0"] { top: 90px; }
-      .text-slide[data-idx="1"] { top: 95px; }
       .nav-logo { height: 38px; }
       .text-headline { font-size: clamp(2.2rem, 5vw, 2.8rem); }
-      .text-body { font-size: 1.05rem; }
+      .text-body { font-size: 1.1rem; max-width: 520px; }
       .scroll-spacer { height: 170vh; }
       .scroll-spacer:first-child { height: 60vh; }
       .scroll-spacer:last-child { height: 170vh; }
