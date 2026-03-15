@@ -469,7 +469,8 @@
       ['#84fab0','#8fd3f4','#d399c1','#ff4b1f'],  // 4: Soccer — Berry
     ];
     const gradState = [0, 0, 0, 0, 0];
-    const GRAD_SPEED = 0.025;
+    const GRAD_SPEED = 0.018;
+    const FADE_SPEED = 0.04;
 
     const SECTIONS = [
       { key: 'hero',     folder: 'frames/hero/'     },
@@ -500,7 +501,7 @@
     document.querySelectorAll('.text-headline[data-grad]').forEach(el => {
       const gi = parseInt(el.dataset.grad);
       const g = GRADS[gi];
-      el.style.backgroundImage = `linear-gradient(90deg, ${g[0]} 0%, ${g[1]} 16.5%, ${g[2]} 33%, ${g[3]} 50%, #111 50%, #111 100%)`;
+      el.style.backgroundImage = `linear-gradient(90deg, ${g[0]} 0%, ${g[1]} 16.5%, ${g[2]} 33%, ${g[3]} 44%, #111 56%, #111 100%)`;
       gradHeadlines[gi] = el;
     });
 
@@ -722,7 +723,7 @@
         if (visible) {
           gradState[gi] = Math.min(gradState[gi] + GRAD_SPEED, 1);
         } else if (ai !== gi) {
-          gradState[gi] = 0;
+          gradState[gi] = Math.max(gradState[gi] - FADE_SPEED, 0);
         }
         const eased = eOut(gradState[gi]);
         el.style.backgroundPosition = `${(1 - eased) * 100}% 0`;
