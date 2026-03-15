@@ -193,11 +193,11 @@
 
     /* ── RESPONSIVE: Tablet (769px – 1024px) ── */
     @media (min-width: 769px) and (max-width: 1024px) {
-      #scrollCanvas { width: 75%; height: 68svh; max-width: 600px; }
-      .text-bg { height: 32svh; }
-      .text-slide { top: 120px; }
-      .text-slide[data-idx="0"] { top: 110px; }
-      .text-slide[data-idx="1"] { top: 115px; }
+      #scrollCanvas { width: 65%; height: 72svh; max-width: none; }
+      .text-bg { height: 28svh; }
+      .text-slide { top: 100px; }
+      .text-slide[data-idx="0"] { top: 90px; }
+      .text-slide[data-idx="1"] { top: 95px; }
       .scroll-spacer { height: 170vh; }
       .scroll-spacer:first-child { height: 60vh; }
       .scroll-spacer:last-child { height: 170vh; }
@@ -206,15 +206,23 @@
     /* ── RESPONSIVE: Desktop (1025px+) ── */
     @media (min-width: 1025px) {
       .nav-logo { height: 32px; }
-      #scrollCanvas { width: 50%; max-width: 560px; height: 72svh; }
-      .text-headline { font-size: 3rem; }
-      .text-bg { height: 28svh; }
-      .text-slide { top: 140px; }
-      .text-slide[data-idx="0"] { top: 120px; }
-      .text-slide[data-idx="1"] { top: 130px; }
+      #scrollCanvas { width: 45%; max-width: none; height: 85svh; }
+      .text-headline { font-size: 3.2rem; }
+      .text-body { font-size: 1.1rem; }
+      .text-bg { height: 18svh; }
+      .text-slide { top: 90px; }
+      .text-slide[data-idx="0"] { top: 70px; }
+      .text-slide[data-idx="1"] { top: 80px; }
       .scroll-spacer { height: 180vh; }
       .scroll-spacer:first-child { height: 70vh; }
       .scroll-spacer:last-child { height: 180vh; }
+    }
+
+    /* ── RESPONSIVE: Large Desktop (1440px+) ── */
+    @media (min-width: 1440px) {
+      #scrollCanvas { width: 38%; height: 88svh; }
+      .text-headline { font-size: 3.5rem; }
+      .text-bg { height: 15svh; }
     }
   </style>
 </head>
