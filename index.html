@@ -284,8 +284,23 @@
       50% { transform: translateY(6px); opacity: 1; }
     }
 
-    /* ── RESPONSIVE: Tablet + Desktop shared (769px+) — Two-column layout ── */
-    @media (min-width: 769px) {
+    /* ── RESPONSIVE: Tablet Portrait (769px – 1024px) — Single column, scaled up ── */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      #scrollCanvas { width: 65%; height: 72svh; max-width: none; }
+      .text-bg { height: 28svh; }
+      .text-slide { top: 100px; }
+      .text-slide[data-idx="0"] { top: 90px; }
+      .text-slide[data-idx="1"] { top: 95px; }
+      .nav-logo { height: 38px; }
+      .text-headline { font-size: clamp(2.2rem, 5vw, 2.8rem); }
+      .text-body { font-size: 1.05rem; }
+      .scroll-spacer { height: 170vh; }
+      .scroll-spacer:first-child { height: 60vh; }
+      .scroll-spacer:last-child { height: 170vh; }
+    }
+
+    /* ── RESPONSIVE: Landscape Tablet + Desktop (1025px+) — Two-column layout ── */
+    @media (min-width: 1025px) {
       :root { --col: min(82vw, 1800px); }
 
       .display {
@@ -336,20 +351,6 @@
       .text-body { font-size: calc(0.85rem + 0.2vw); }
       .btn-contact { font-size: calc(0.85rem + 0.1vw); padding: calc(12px + 0.15vw) calc(28px + 0.6vw); }
 
-      .scroll-spacer { height: 170vh; }
-      .scroll-spacer:first-child { height: 60vh; }
-      .scroll-spacer:last-child { height: 170vh; }
-    }
-
-    /* ── RESPONSIVE: Tablet-specific (769px – 1024px) ── */
-    @media (min-width: 769px) and (max-width: 1024px) {
-      :root { --col: 92vw; }
-      #scrollCanvas { height: 75svh; }
-      .text-slide { padding: 0 2vw 0 4vw; }
-    }
-
-    /* ── RESPONSIVE: Desktop (1025px+) ── */
-    @media (min-width: 1025px) {
       .scroll-spacer { height: 180vh; }
       .scroll-spacer:first-child { height: 70vh; }
       .scroll-spacer:last-child { height: 180vh; }
