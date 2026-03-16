@@ -48,6 +48,14 @@
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
+            "name": "Virtual Training",
+            "description": "Live 1-on-1 training over video with real-time form correction"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
             "name": "Physiotherapy",
             "description": "Swiss-certified physiotherapy at your home"
           }
@@ -224,10 +232,15 @@
       -webkit-background-clip: text !important;
       background-clip: text !important;
       -webkit-text-fill-color: transparent;
-      background-size: 300% 100%;
+      background-size: 400% 100%;
       background-position: 100% 0;
     }
     .text-body { font-size: clamp(0.9rem, 2.5vw, 1.05rem); line-height: 1.6; color: var(--grey); max-width: 460px; margin: 0 auto; }
+    .app-icons { display: flex; gap: 16px; margin-top: 18px; }
+    .app-icon { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .app-icon-img { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .app-icon-img svg { width: 24px; height: 24px; }
+    .app-icon span { font-size: 0.65rem; color: var(--grey); font-weight: 500; letter-spacing: -0.01em; }
     .btn-contact {
       display: inline-flex; align-items: center; padding: 13px 34px;
       background: #0071E3; color: #fff; font-family: var(--font);
@@ -375,6 +388,7 @@
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-section">
       <a href="#s-training" class="menu-link" data-menu-nav data-i18n="menu_training">Training</a>
+      <a href="#s-virtual" class="menu-link" data-menu-nav data-i18n="menu_virtual">Virtual</a>
       <a href="#s-physio" class="menu-link" data-menu-nav data-i18n="menu_physio">Physio</a>
       <a href="#s-massage" class="menu-link" data-menu-nav data-i18n="menu_massage">Massage</a>
       <a href="#s-soccer" class="menu-link" data-menu-nav data-i18n="menu_soccer">Soccer</a>
@@ -444,18 +458,48 @@
         <p class="text-body" data-i18n="training_body">Bespoke in-home training that combines workouts, physio, and sports massage — all in one session. No gym. No commute. Just results.</p>
       </div>
       <div class="text-slide" data-idx="2">
-        <h2 class="text-headline" data-grad="2" data-i18n-html="physio_headline">Fix it. Move better.</h2>
-        <p class="text-body" data-i18n="physio_body">Swiss-certified physiotherapy that releases blockages, restores mobility, and builds long-term resilience — at your home.</p>
+        <h2 class="text-headline" data-grad="2" data-i18n-html="virtual_headline">Your session.<br>Your screen.</h2>
+        <p class="text-body" data-i18n="virtual_body">Live 1-on-1 training over video — with real-time form correction, personal programming, and the same intensity as an in-person session. No pre-recorded videos. Just you and your trainer.</p>
+        <div class="app-icons">
+          <div class="app-icon">
+            <div class="app-icon-img" style="background:#2D8CFF; border-radius:14px;">
+              <svg viewBox="0 0 24 24" fill="white"><path d="M5.033 14.649H.743a.74.74 0 0 1-.686-.458.74.74 0 0 1 .16-.808L3.19 10.41H1.06A1.06 1.06 0 0 1 0 9.35h3.957c.301 0 .57.18.686.458a.74.74 0 0 1-.161.808L1.51 13.59h2.464c.585 0 1.06.475 1.06 1.06zM24 11.338c0-1.14-.927-2.066-2.066-2.066-.61 0-1.158.265-1.537.686a2.061 2.061 0 0 0-1.536-.686c-1.14 0-2.066.926-2.066 2.066v3.311a1.06 1.06 0 0 0 1.06-1.06v-2.251a1.004 1.004 0 0 1 2.013 0v2.251c0 .586.474 1.06 1.06 1.06v-3.311a1.004 1.004 0 0 1 2.012 0v2.251c0 .586.475 1.06 1.06 1.06zM16.265 12a2.728 2.728 0 1 1-5.457 0 2.728 2.728 0 0 1 5.457 0zm-1.06 0a1.669 1.669 0 1 0-3.338 0 1.669 1.669 0 0 0 3.338 0zm-4.82 0a2.728 2.728 0 1 1-5.458 0 2.728 2.728 0 0 1 5.457 0zm-1.06 0a1.669 1.669 0 1 0-3.338 0 1.669 1.669 0 0 0 3.338 0z"/></svg>
+            </div>
+            <span>Zoom</span>
+          </div>
+          <div class="app-icon">
+            <div class="app-icon-img" style="background:linear-gradient(135deg,#6ADF5E,#30B84A); border-radius:14px;">
+              <svg viewBox="0 0 24 24" fill="white"><rect x="3" y="6.5" width="12" height="11" rx="2"/><path d="M16 10l4.5-3v10L16 14z"/></svg>
+            </div>
+            <span>FaceTime</span>
+          </div>
+          <div class="app-icon">
+            <div class="app-icon-img" style="background:#fff; border-radius:14px; border:1px solid #e5e7eb;">
+              <svg viewBox="0 0 24 24"><path fill="#00897B" d="M5.53 2.13 0 7.75h5.53zm.398 0v5.62h7.608v3.65l5.47-4.45c-.014-1.22.031-2.25-.025-3.46-.148-1.09-1.287-1.47-2.236-1.36z"/><path fill="#0066DA" d="M23.1 4.32c-.802.295-1.358.995-2.047 1.49-2.506 2.05-4.982 4.12-7.468 6.19 3.025 2.59 6.04 5.18 9.065 7.76 1.218.671 1.428-.814 1.328-1.64v-13a.828.828 0 0 0-.877-.825z"/><path fill="#00897B" d="M.038 8.15v7.7h5.53v-7.7z"/><path fill="#00AC47" d="M13.577 16.25H6.008v5.62c3.864-.006 7.737.011 11.58-.009 1.02-.07 1.618-1.12 1.468-2.07v-2.51l-5.47-4.68v3.65z"/><path fill="#EA4335" d="M.038 16.25c.02 1.44-.041 2.88.033 4.31.162.948 1.158 1.43 2.047 1.31h3.464v-5.62z"/><path fill="#FFBA00" d="M5.53 2.13 0 7.75h5.53z"/></svg>
+            </div>
+            <span>Google Meet</span>
+          </div>
+          <div class="app-icon">
+            <div class="app-icon-img" style="background:#25D366; border-radius:14px;">
+              <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            </div>
+            <span>WhatsApp</span>
+          </div>
+        </div>
       </div>
       <div class="text-slide" data-idx="3">
-        <h2 class="text-headline" data-grad="3" data-i18n-html="massage_headline">Recovery is<br>the strategy.</h2>
-        <p class="text-body" data-i18n="massage_body">Deep-tissue sports massage that releases tension, accelerates recovery, and prepares your body for what's next.</p>
+        <h2 class="text-headline" data-grad="3" data-i18n-html="physio_headline">Fix it. Move better.</h2>
+        <p class="text-body" data-i18n="physio_body">Swiss-certified physiotherapy that releases blockages, restores mobility, and builds long-term resilience — at your home.</p>
       </div>
       <div class="text-slide" data-idx="4">
-        <h2 class="text-headline" data-grad="4" data-i18n="soccer_headline">Trained by a pro.</h2>
-        <p class="text-body" data-i18n="soccer_body">Tactics, speed, and ball control — coached by a former Swiss professional footballer. Sessions that sharpen every aspect of your game.</p>
+        <h2 class="text-headline" data-grad="4" data-i18n-html="massage_headline">Recovery is<br>the strategy.</h2>
+        <p class="text-body" data-i18n="massage_body">Deep-tissue sports massage that releases tension, accelerates recovery, and prepares your body for what's next.</p>
       </div>
       <div class="text-slide" data-idx="5">
+        <h2 class="text-headline" data-grad="5" data-i18n="soccer_headline">Trained by a pro.</h2>
+        <p class="text-body" data-i18n="soccer_body">Tactics, speed, and ball control — coached by a former Swiss professional footballer. Sessions that sharpen every aspect of your game.</p>
+      </div>
+      <div class="text-slide" data-idx="6">
         <h2 class="text-headline c-black" data-i18n="closer_headline">Ready when you are.</h2>
         <a href="https://wa.me/41765687707?text=Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="btn-contact wa-link" target="_blank" rel="noopener" data-i18n="cta">Contact Me</a>
       </div>
@@ -470,10 +514,11 @@
   <div class="scroll-track">
     <div class="scroll-spacer" id="s-hero" data-section="0"></div>
     <div class="scroll-spacer" id="s-training" data-section="1"></div>
-    <div class="scroll-spacer" id="s-physio" data-section="2"></div>
-    <div class="scroll-spacer" id="s-massage" data-section="3"></div>
-    <div class="scroll-spacer" id="s-soccer" data-section="4"></div>
-    <div class="scroll-spacer" id="s-closer" data-section="5"></div>
+    <div class="scroll-spacer" id="s-virtual" data-section="2"></div>
+    <div class="scroll-spacer" id="s-physio" data-section="3"></div>
+    <div class="scroll-spacer" id="s-massage" data-section="4"></div>
+    <div class="scroll-spacer" id="s-soccer" data-section="5"></div>
+    <div class="scroll-spacer" id="s-closer" data-section="6"></div>
   </div>
 
   <!-- Extra scroll runway: lets the CTA "breathe" at the end -->
@@ -492,17 +537,19 @@
     const GRADS = [
       ['#2ea8ff','#b258ff','#ff3b7c','#ff8e25'],  // 0: Hero — Apple Vibe
       ['#00f2fe','#4facfe','#f093fb','#f5576c'],  // 1: Training — Cyberpunk
-      ['#11998e','#38ef7d','#0eb2c0','#7b2ff7'],  // 2: Physio — Aurora
-      ['#fee140','#fa709a','#bf089a','#2a0845'],  // 3: Massage — Sunset
-      ['#84fab0','#8fd3f4','#d399c1','#ff4b1f'],  // 4: Soccer — Berry
+      ['#4F46E5','#6366F1','#8B5CF6','#06B6D4'],  // 2: Virtual — Digital Glow
+      ['#11998e','#38ef7d','#0eb2c0','#7b2ff7'],  // 3: Physio — Aurora
+      ['#fee140','#fa709a','#bf089a','#2a0845'],  // 4: Massage — Sunset
+      ['#84fab0','#8fd3f4','#d399c1','#ff4b1f'],  // 5: Soccer — Berry
     ];
-    const gradState = [0, 0, 0, 0, 0];
+    const gradState = [0, 0, 0, 0, 0, 0];
     const GRAD_SPEED = 0.018;
     const FADE_SPEED = 0.04;
 
     const SECTIONS = [
       { key: 'hero',     folder: 'frames/hero/'     },
       { key: 'training', folder: 'frames/training/' },
+      { key: 'virtual',  folder: 'frames/virtual/'  },
       { key: 'physio',   folder: 'frames/physio/'   },
       { key: 'massage',  folder: 'frames/massage/'  },
       { key: 'soccer',   folder: 'frames/soccer/'   },
@@ -529,7 +576,7 @@
     document.querySelectorAll('.text-headline[data-grad]').forEach(el => {
       const gi = parseInt(el.dataset.grad);
       const g = GRADS[gi];
-      el.style.backgroundImage = `linear-gradient(90deg, #111 0%, #111 29%, ${g[0]} 36%, ${g[1]} 46%, ${g[2]} 56%, ${g[3]} 65%, #111 72%, #111 100%)`;
+      el.style.backgroundImage = `linear-gradient(90deg, #111 0%, #111 20%, ${g[0]} 30%, ${g[1]} 40%, ${g[2]} 50%, ${g[3]} 60%, #111 70%, #111 100%)`;
       gradHeadlines[gi] = el;
     });
 
@@ -751,7 +798,7 @@
         if (visible && gradState[gi] < 1) {
           gradState[gi] = Math.min(gradState[gi] + GRAD_SPEED, 1);
         }
-        const pos = 100 - eOut(Math.min(gradState[gi], 1)) * 50;
+        const pos = 100 - eOut(Math.min(gradState[gi], 1)) * 65;
         el.style.backgroundPosition = `${pos}% 0`;
       }
 
@@ -807,6 +854,7 @@
         page_title: 'Genc Krasniqi — Your Body. Your Gym.',
         meta_desc: 'Bespoke training, physio & massage. Swiss precision, delivered to your door in Dubai.',
         menu_training: 'Training',
+        menu_virtual: 'Virtual',
         menu_physio: 'Physio',
         menu_massage: 'Massage',
         menu_soccer: 'Soccer',
@@ -816,6 +864,8 @@
         hero_body: 'Bespoke training, physio &amp; massage.<br>Swiss precision, delivered to your door.',
         training_headline: 'Your gym<br>comes to you.',
         training_body: 'Bespoke in-home training that combines workouts, physio, and sports massage — all in one session. No gym. No commute. Just results.',
+        virtual_headline: 'Your session.<br>Your screen.',
+        virtual_body: 'Live 1-on-1 training over video \u2014 with real-time form correction, personal programming, and the same intensity as an in-person session. No pre-recorded videos. Just you and your trainer.',
         physio_headline: 'Fix it. Move better.',
         physio_body: 'Swiss-certified physiotherapy that releases blockages, restores mobility, and builds long-term resilience — at your home.',
         massage_headline: 'Recovery is<br>the strategy.',
@@ -830,6 +880,7 @@
         page_title: 'Genc Krasniqi — Dein Körper. Dein Gym.',
         meta_desc: 'Massgeschneidertes Training, Physio & Massage. Schweizer Präzision, direkt zu dir nach Dubai.',
         menu_training: 'Training',
+        menu_virtual: 'Virtual',
         menu_physio: 'Physio',
         menu_massage: 'Massage',
         menu_soccer: 'Fussball',
@@ -839,6 +890,8 @@
         hero_body: 'Massgeschneidertes Training, Physio &amp; Massage.<br>Schweizer Präzision, direkt zu dir.',
         training_headline: 'Dein Gym<br>kommt zu dir.',
         training_body: 'Massgeschneidertes In-Home Training — Workouts, Physio und Sportmassage in einer Session. Kein Gym. Kein Pendeln. Nur Resultate.',
+        virtual_headline: 'Deine Session.<br>Dein Screen.',
+        virtual_body: 'Live 1-on-1 Training per Video \u2014 mit Echtzeit-Korrektur, individuellem Programm und der gleichen Intensität wie vor Ort. Keine aufgezeichneten Videos. Nur du und dein Trainer.',
         physio_headline: 'Lösen. Bewegen. Stärken.',
         physio_body: 'Diplomierte Physiotherapie, die Blockaden löst, Mobilität wiederherstellt und langfristige Belastbarkeit aufbaut — bei dir zuhause.',
         massage_headline: 'Recovery ist<br>die Strategie.',
