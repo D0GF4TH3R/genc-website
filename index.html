@@ -236,6 +236,12 @@
       background-position: 100% 0;
     }
     .text-body { font-size: clamp(0.9rem, 2.5vw, 1.05rem); line-height: 1.6; color: var(--grey); max-width: 460px; margin: 0 auto; }
+    .virtual-wrap { display: flex; align-items: flex-start; gap: 14px; }
+    .virtual-text { flex: 1; min-width: 0; }
+    .virtual-text .text-body { margin: 0; }
+    .app-strip { display: flex; flex-direction: column; gap: 8px; padding-top: 4px; flex-shrink: 0; }
+    .app-chip { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+    .app-chip svg { width: 20px; height: 20px; }
 .btn-contact {
       display: inline-flex; align-items: center; padding: 13px 34px;
       background: #0071E3; color: #fff; font-family: var(--font);
@@ -354,6 +360,8 @@
       .nav-logo { height: calc(28px + 0.8vw); }
       .text-headline { font-size: calc(1.5rem + 1.5vw); }
       .text-body { font-size: calc(0.85rem + 0.2vw); }
+      .virtual-wrap { flex-direction: column; }
+      .app-strip { flex-direction: row; padding-top: 12px; }
       .btn-contact { font-size: calc(0.85rem + 0.1vw); padding: calc(12px + 0.15vw) calc(28px + 0.6vw); }
 
       .scroll-spacer { height: 180vh; }
@@ -453,8 +461,18 @@
         <p class="text-body" data-i18n="training_body">Bespoke in-home training that combines workouts, physio, and sports massage — all in one session. No gym. No commute. Just results.</p>
       </div>
       <div class="text-slide" data-idx="2">
-        <h2 class="text-headline" data-grad="2" data-i18n-html="virtual_headline">Your session.<br>Your screen.</h2>
-        <p class="text-body" data-i18n="virtual_body">Live 1-on-1 training over video — with real-time form correction, personal programming, and the same intensity as an in-person session. No pre-recorded videos. Just you and your trainer.</p>
+        <div class="virtual-wrap">
+          <div class="virtual-text">
+            <h2 class="text-headline" data-grad="2" data-i18n-html="virtual_headline">Your session.<br>Your screen.</h2>
+            <p class="text-body" data-i18n="virtual_body">Live 1-on-1 training over video — with real-time form correction, personal programming, and the same intensity as an in-person session. No pre-recorded videos. Just you and your trainer.</p>
+          </div>
+          <div class="app-strip">
+            <div class="app-chip" style="background:#2D8CFF;"><svg viewBox="0 0 24 24" fill="white"><path d="M5.033 14.649H.743a.74.74 0 0 1-.686-.458.74.74 0 0 1 .16-.808L3.19 10.41H1.06A1.06 1.06 0 0 1 0 9.35h3.957c.301 0 .57.18.686.458a.74.74 0 0 1-.161.808L1.51 13.59h2.464c.585 0 1.06.475 1.06 1.06zM24 11.338c0-1.14-.927-2.066-2.066-2.066-.61 0-1.158.265-1.537.686a2.061 2.061 0 0 0-1.536-.686c-1.14 0-2.066.926-2.066 2.066v3.311a1.06 1.06 0 0 0 1.06-1.06v-2.251a1.004 1.004 0 0 1 2.013 0v2.251c0 .586.474 1.06 1.06 1.06v-3.311a1.004 1.004 0 0 1 2.012 0v2.251c0 .586.475 1.06 1.06 1.06zM16.265 12a2.728 2.728 0 1 1-5.457 0 2.728 2.728 0 0 1 5.457 0zm-1.06 0a1.669 1.669 0 1 0-3.338 0 1.669 1.669 0 0 0 3.338 0zm-4.82 0a2.728 2.728 0 1 1-5.458 0 2.728 2.728 0 0 1 5.457 0zm-1.06 0a1.669 1.669 0 1 0-3.338 0 1.669 1.669 0 0 0 3.338 0z"/></svg></div>
+            <div class="app-chip" style="background:linear-gradient(135deg,#6ADF5E,#30B84A);"><svg viewBox="0 0 24 24" fill="white"><rect x="3" y="6.5" width="12" height="11" rx="2"/><path d="M16 10l4.5-3v10L16 14z"/></svg></div>
+            <div class="app-chip" style="background:#fff; border:1px solid #e5e7eb;"><svg viewBox="0 0 24 24"><path fill="#00897B" d="M5.53 2.13 0 7.75h5.53zm.398 0v5.62h7.608v3.65l5.47-4.45c-.014-1.22.031-2.25-.025-3.46-.148-1.09-1.287-1.47-2.236-1.36z"/><path fill="#0066DA" d="M23.1 4.32c-.802.295-1.358.995-2.047 1.49-2.506 2.05-4.982 4.12-7.468 6.19 3.025 2.59 6.04 5.18 9.065 7.76 1.218.671 1.428-.814 1.328-1.64v-13a.828.828 0 0 0-.877-.825z"/><path fill="#00897B" d="M.038 8.15v7.7h5.53v-7.7z"/><path fill="#00AC47" d="M13.577 16.25H6.008v5.62c3.864-.006 7.737.011 11.58-.009 1.02-.07 1.618-1.12 1.468-2.07v-2.51l-5.47-4.68v3.65z"/><path fill="#EA4335" d="M.038 16.25c.02 1.44-.041 2.88.033 4.31.162.948 1.158 1.43 2.047 1.31h3.464v-5.62z"/><path fill="#FFBA00" d="M5.53 2.13 0 7.75h5.53z"/></svg></div>
+            <div class="app-chip" style="background:#25D366;"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></div>
+          </div>
+        </div>
       </div>
       <div class="text-slide" data-idx="3">
         <h2 class="text-headline" data-grad="3" data-i18n-html="physio_headline">Fix it. Move better.</h2>
