@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://d0gf4th3r.github.io/genc-website/sitemap.xml
