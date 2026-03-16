@@ -697,7 +697,7 @@
 
     // ── Main scroll-driven loop
     function tick() {
-      if (!isReady) { requestAnimationFrame(tick); return; }
+      if (!isReady || eePlaying) { requestAnimationFrame(tick); return; }
 
       const sy = scrollY;
       let ai = 0, sp = 0;
@@ -788,6 +788,8 @@
         const pos = 100 - eOut(Math.min(gradState[gi], 1)) * 65;
         el.style.backgroundPosition = `${pos}% 0`;
       }
+
+      if (!eePlaying) eeCheck();
 
       requestAnimationFrame(tick);
     }
@@ -1012,10 +1014,11 @@
 
     setLang(detectLang());
 
-    // ── Easter Egg: Triple-tap on canvas in closer section
+    // ── Easter Egg: Auto-plays on same canvas after 30s at bottom
     const EE_COUNT = 169;
     const EE_FPS = 24;
-    let eeTaps = 0, eeTimer = null, eeFrames = [], eeLoaded = false, eePlaying = false;
+    let eeFrames = [], eeLoaded = false, eePlaying = false, eePlayed = false;
+    let eeTimeout = null, eeAtBottom = false;
 
     function eePreload() {
       if (eeLoaded || eeFrames.length) return;
@@ -1029,70 +1032,38 @@
     }
 
     function eePlay() {
-      if (eePlaying) return;
+      if (eePlaying || eePlayed) return;
       eePlaying = true;
-      const overlay = document.createElement('div');
-      Object.assign(overlay.style, {
-        position:'fixed', top:'0', left:'0', right:'0', bottom:'0',
-        zIndex:'9999', background:'#000', display:'flex',
-        alignItems:'center', justifyContent:'center',
-        opacity:'0', transition:'opacity 0.4s ease'
-      });
-      const c = document.createElement('canvas');
-      overlay.appendChild(c);
-      document.body.appendChild(overlay);
-      requestAnimationFrame(() => overlay.style.opacity = '1');
-
-      const cx = c.getContext('2d');
-      function sizeEE() {
-        const dpr = devicePixelRatio || 1;
-        c.style.width = '100%'; c.style.height = '100%';
-        c.style.objectFit = 'contain';
-        c.width = innerWidth * dpr; c.height = innerHeight * dpr;
-        cx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      }
-      sizeEE();
-
+      eePlayed = true;
       let fi = 0;
-      const interval = setInterval(() => {
-        if (fi >= eeFrames.length) {
-          clearInterval(interval);
-          overlay.style.opacity = '0';
-          setTimeout(() => { overlay.remove(); eePlaying = false; }, 400);
+      function eeAnimate() {
+        if (!eePlaying || fi >= eeFrames.length) {
+          eePlaying = false;
+          // Show last EE frame
+          if (eeFrames.length) draw(eeFrames[eeFrames.length - 1]);
           return;
         }
         const img = eeFrames[fi];
-        if (img.complete && img.naturalWidth) {
-          const w = innerWidth, h = innerHeight;
-          const ir = img.naturalWidth / img.naturalHeight;
-          const cr = w / h;
-          let dw, dh;
-          if (ir > cr) { dw = w; dh = w / ir; }
-          else { dh = h; dw = h * ir; }
-          cx.clearRect(0, 0, w, h);
-          cx.drawImage(img, (w - dw) / 2, (h - dh) / 2, dw, dh);
-        }
+        if (img.complete && img.naturalWidth) draw(img);
         fi++;
-      }, 1000 / EE_FPS);
-
-      overlay.onclick = () => {
-        clearInterval(interval);
-        overlay.style.opacity = '0';
-        setTimeout(() => { overlay.remove(); eePlaying = false; }, 400);
-      };
+        setTimeout(eeAnimate, 1000 / EE_FPS);
+      }
+      eeAnimate();
     }
 
-    canvas.addEventListener('click', () => {
-      if (curSec !== SECTIONS.length - 1) { eeTaps = 0; return; }
-      eeTaps++;
-      if (eeTaps === 1) eePreload();
-      clearTimeout(eeTimer);
-      eeTimer = setTimeout(() => { eeTaps = 0; }, 800);
-      if (eeTaps >= 3) {
-        eeTaps = 0;
-        if (eeLoaded) eePlay();
+    function eeCheck() {
+      const lastSec = SECTIONS.length - 1;
+      const atEnd = curSec === lastSec && sectionLoaded[lastSec] &&
+                    curFrame >= allFrames[lastSec].length - 2;
+      if (atEnd && !eeAtBottom && !eePlayed) {
+        eeAtBottom = true;
+        eePreload();
+        eeTimeout = setTimeout(() => { if (eeLoaded && eeAtBottom) eePlay(); }, 30000);
+      } else if (!atEnd && eeAtBottom && !eePlaying) {
+        eeAtBottom = false;
+        clearTimeout(eeTimeout);
       }
-    });
+    }
 
     // ── Go
     history.scrollRestoration = 'manual';
