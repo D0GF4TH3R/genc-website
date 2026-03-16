@@ -744,25 +744,14 @@
         if (!el) continue;
 
         const visible = (gi === 0)
-          ? (ai === 0)
+          ? (ai === 0 && heroDone)
           : (ai === gi && sp >= TD + 0.15);
 
-        if (visible) {
-          if (gradState[gi] >= 2) gradState[gi] = 0; // reset after full exit
+        // Once sweep starts, it only moves forward — never reverses
+        if (visible && gradState[gi] < 1) {
           gradState[gi] = Math.min(gradState[gi] + GRAD_SPEED, 1);
-        } else if (ai !== gi) {
-          if (gradState[gi] > 0 && gradState[gi] < 1) {
-            gradState[gi] = Math.max(gradState[gi] - GRAD_SPEED, 0); // interrupted entry
-          } else if (gradState[gi] >= 1 && gradState[gi] < 2) {
-            gradState[gi] = Math.min(gradState[gi] + FADE_SPEED, 2); // exit: black from left
-          }
         }
-        let pos;
-        if (gradState[gi] <= 1) {
-          pos = 100 - eOut(gradState[gi]) * 50; // entry: 100%→50%
-        } else {
-          pos = 50 - eOut(gradState[gi] - 1) * 50; // exit: 50%→0%
-        }
+        const pos = 100 - eOut(Math.min(gradState[gi], 1)) * 50;
         el.style.backgroundPosition = `${pos}% 0`;
       }
 
@@ -785,7 +774,18 @@
         const t = document.querySelector(a.getAttribute('href'));
         mOpen = false; mOvl.classList.remove('open'); mBtn.classList.remove('menu-open');
         document.body.style.overflow = '';
-        if (t) setTimeout(() => scrollTo({ top: t.offsetTop + t.offsetHeight - 2, behavior: 'smooth' }), 100);
+        if (t) {
+          const d = document.querySelector('.display');
+          d.style.transition = 'opacity 0.25s ease';
+          d.style.opacity = '0';
+          setTimeout(() => {
+            scrollTo({ top: t.offsetTop + t.offsetHeight - 2 });
+            requestAnimationFrame(() => {
+              d.style.transition = 'opacity 0.35s ease';
+              d.style.opacity = '1';
+            });
+          }, 260);
+        }
       };
     });
 
