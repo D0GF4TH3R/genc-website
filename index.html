@@ -305,11 +305,12 @@
         width: var(--col);
       }
       .nav-bar {
-        left: 50%; right: auto; transform: translateX(-50%);
-        width: var(--col); padding: calc(14px + 0.3vw) calc(20px + 0.5vw);
+        left: calc(50% + var(--col) * 0.2);
+        right: auto; transform: translateX(-50%);
+        width: calc(var(--col) * 0.6); padding: calc(14px + 0.3vw) calc(20px + 0.5vw);
       }
       .wa-float {
-        right: calc(50% - var(--col) / 2 + 20px);
+        right: calc(50% - var(--col) * 0.3 + 20px);
       }
       .scroll-hint {
         left: 50%;
