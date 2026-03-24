@@ -1,6 +1,6 @@
 # Genc Krasniqi — Elite Personal Training in Dubai
 
-> Premium in-home personal training, virtual training, physiotherapy, sports massage, and football coaching in Dubai, UAE.
+> Premium in-home personal training, EMS training, virtual coaching, and football coaching in Dubai, UAE.
 
 ## About Genc Krasniqi
 
@@ -9,9 +9,8 @@ Genc Krasniqi is a former Swiss professional footballer (Grasshoppers Club Züri
 ## Services
 
 - **Personal Training**: Bespoke in-home sessions combining workouts, physio, and sports massage — all in one visit. No gym required.
+- **EMS Training**: Wireless EMS training powered by Visionbody — German-engineered, FDA-cleared. 98% muscle activation, 12 channels, 20 minutes. Guided by a certified pro.
 - **Virtual Training**: Live 1-on-1 training over video (Zoom, FaceTime, Google Meet, Microsoft Teams) with real-time form correction and personal programming.
-- **Physiotherapy**: Swiss-certified physiotherapy that releases blockages, restores mobility, and builds long-term resilience.
-- **Sports Massage**: Deep-tissue sports massage that releases tension, accelerates recovery, and prepares the body for peak performance.
 - **Football Coaching**: Professional football coaching by a former Swiss pro — tactics, speed, ball control, and game sharpening.
 
 ## Key Facts
