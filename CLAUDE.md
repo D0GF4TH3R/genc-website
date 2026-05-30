@@ -6,7 +6,7 @@
 ## Project
 
 **Repo:** https://github.com/D0GF4TH3R/genc-website
-**Live:** https://d0gf4th3r.github.io/genc-website/
+**Live:** https://gkelite.training/
 **Developer:** Dominick Amp (@D0GF4TH3R)
 **Client:** Genc Krasniqi
 
@@ -16,14 +16,24 @@ Premium personal training website for **Genc Krasniqi** — former Swiss profess
 
 ## Architecture
 
-**Everything is one file:** `index.html` (~930 lines, ~46 KB). No frameworks, no build tools, no dependencies. Pure HTML/CSS/JS.
+**Everything is one file:** `index.html` (~1350 lines, ~75 KB). No frameworks, no build tools, no dependencies. Pure HTML/CSS/JS.
 
-**Hosted on GitHub Pages.** Deploy = push to main. Auto-builds in 1–2 minutes.
+**Hosted on Cloudflare Pages** at `gkelite.training`. Deploy = push to main. Auto-builds in 1–2 minutes.
 
 ```
 genc-website/
 ├── index.html          ← THE file. All CSS, JS, HTML, i18n, legal pages.
-├── GK_Logo.png         ← 852×178, PNG with alpha, 15 KB
+├── GK_Logo.png         ← 852×178, PNG wordmark "⊙ ELITE TRAINING" (black on alpha), 15 KB
+├── about-genc.webp     ← 1232×2000 About-section graphic (photo + stat grid); also Schema image
+├── og-image.jpg        ← 1200×630 link-preview / social share card (Genc + logo + tagline)
+├── favicon.ico         ← multi-res 16/32/48, GK monogram white on green tile
+├── favicon-32x32.png / favicon-16x16.png  ← PNG favicons
+├── apple-touch-icon.png ← 180×180 iOS home-screen icon (green square)
+├── icon-192.png / icon-512.png ← PWA / Android icons
+├── site.webmanifest    ← PWA manifest (theme #2D6A4F)
+├── robots.txt          ← allows all, points to sitemap
+├── sitemap.xml         ← single URL (gkelite.training), update lastmod on changes
+├── llms.txt            ← AI-crawler summary of services + facts
 ├── CLAUDE.md           ← You are here
 ├── frames/
 │   ├── hero/           121 WebP frames (scroll-driven animation)
@@ -37,11 +47,11 @@ genc-website/
 └── .gitignore
 ```
 
-**Do NOT create new files.** All changes go into `index.html`. The site is intentionally single-file.
+**Do NOT create new files** for site content. All site changes go into `index.html` (the SEO support files robots.txt / sitemap.xml / llms.txt already exist and may be edited). The site is intentionally single-file.
 
 ## Core Feature: Scroll-Driven Frame Animation
 
-The site uses an Apple-style scroll-driven canvas animation. **NOT** a `<video>` element — it's 726 individual WebP frames drawn on a `<canvas>`, mapped to scroll position.
+The site uses an Apple-style scroll-driven canvas animation. **NOT** a `<video>` element — it's 847 individual WebP frames (7 sections × 121) drawn on a `<canvas>`, mapped to scroll position.
 
 ### Two-Layer System:
 1. **Canvas layer** (z-index 5, fixed to viewport) — Shows video frames that change as user scrolls. Never moves.
@@ -53,7 +63,7 @@ The site uses an Apple-style scroll-driven canvas animation. **NOT** a `<video>`
 2. Hero frames (121) preload with percentage counter
 3. Hero auto-plays at 24fps (Genc turns to camera)
 4. Scroll unlocked, chevron indicator appears
-5. Remaining 5 sections background-load
+5. Remaining 6 sections background-load
 
 ### Text Delay System:
 Text transitions are delayed by 50% (`TD = 0.50`). Old text lingers into the next section's scroll range before fading out, and new text fades in after 50%. This prevents text/frame mismatch. **Do not change TD without understanding the cascade effect on all animations.**
@@ -101,19 +111,20 @@ Frame folder → section mapping: `hero`→0, `training`→1, `virtual`→2, `ph
 
 ## i18n System
 
-**All text is bilingual (EN + DE).** The system uses `data-i18n="key"` for plain text and `data-i18n-html="key"` for HTML (with `<br>` tags).
+**All text is trilingual (EN + DE + AR).** Arabic is fully RTL — `setLang('ar')` sets `<html dir="rtl">` and dedicated `html[dir="rtl"]` CSS rules mirror the layout. The system uses `data-i18n="key"` for plain text and `data-i18n-html="key"` for HTML (with `<br>` tags).
 
-### CRITICAL: When changing ANY text, you MUST update BOTH languages.
+### CRITICAL: When changing ANY text, you MUST update ALL THREE languages (en, de, ar).
 
 Translations live in the `T` object in JS:
 ```javascript
 const T = {
   en: { hero_headline: 'Your Body.<br>Your Gym.', ... },
-  de: { hero_headline: 'Dein Körper.<br>Dein Gym.', ... }
+  de: { hero_headline: 'Dein Körper.<br>Dein Gym.', ... },
+  ar: { hero_headline: '...', ... }
 };
 ```
 
-**Language detection:** `localStorage('genc-lang')` → `navigator.language` → default English.
+**Language detection:** `localStorage('genc-lang')` → `navigator.language` (incl. `ar*`) → default English.
 
 **WhatsApp messages are also translated:**
 - EN: `Hi Genc, I'd like to learn more about your services.`
@@ -123,16 +134,17 @@ When updating WhatsApp message text, remember it's URL-encoded in the `wa_text` 
 
 ## Legal Pages
 
-Impressum and Datenschutz/Privacy Policy are **fullscreen modals** rendered from the `LEGAL` object in JS. They also have EN + DE versions.
+Impressum and Datenschutz/Privacy Policy are **fullscreen modals** rendered from the `LEGAL` object in JS. They have EN + DE + AR versions.
 
 ### Current state (as of March 2026):
 - **Firma aufgelöst** (dissolved end of January 2026) — NO Handelsregister entry in Impressum
 - **Standort:** Dubai, United Arab Emirates / Dubai, Vereinigte Arabische Emirate
-- **Email:** krasniqi_genc@hotmail.com
+- **Email:** genc@gkelite.training
 - **WhatsApp:** +41 76 568 77 07
+- **Hosting:** Cloudflare Pages (named in Datenschutz/Privacy hosting clause)
 - **No cookies, no tracking, no analytics** — Datenschutz is very simple
 
-When editing legal text, update BOTH the `en` and `de` versions in the `LEGAL` object.
+When editing legal text, update ALL THREE (`en`, `de`, `ar`) versions in the `LEGAL` object.
 
 ## Responsive Layout
 
@@ -158,9 +170,16 @@ Safari iOS dynamically changes `dvh` when the toolbar animates — causes canvas
 
 ## SEO
 
-Schema.org `LocalBusiness` JSON-LD is in the `<head>`. Contains all 4 services, Dubai location, Genc as founder with professional bio, opening hours 06–22.
+Schema.org `LocalBusiness` JSON-LD is in the `<head>`. Contains all 5 services, Dubai location (with geo-coordinates + Wikidata `areaServed`), Genc as founder with professional bio, opening hours 06–22. `image` is an array (real photo first, then logo).
 
-**When the domain changes** from GitHub Pages URL to `genc.training`, update the `url` field in the Schema.org block.
+**Other SEO assets in the `<head>` / root:**
+- Title + meta description are Dubai/service keyword-rich. Canonical → `https://gkelite.training/`.
+- A visually-hidden keyword-rich `<h1>` (`.sr-only`) sits at the top of `<body>`; the visible hero headline is an `<h2>` so the design is untouched. Section headlines are `<h2>`.
+- Open Graph + Twitter Card meta; `og:locale:alternate` lists `de_DE` and `ar_AE`.
+- `<link rel="preload" as="image" fetchpriority="high">` warms the first hero frame.
+- `robots.txt`, `sitemap.xml` (bump `lastmod` on changes), `llms.txt`.
+
+Site is on its final domain `gkelite.training` — all URLs already point there. If the domain ever changes again, update: Schema `url`/`image`, canonical, OG/Twitter URLs, `sitemap.xml`, `robots.txt`, `llms.txt`.
 
 ## Contact & Conversion
 
@@ -177,7 +196,7 @@ The message text changes with language. All WhatsApp links have the class `.wa-l
 
 - Commit directly to `main` (no branches needed for this project)
 - Commit messages in German or English, descriptive
-- After pushing, GitHub Pages auto-deploys in 1–2 minutes
+- After pushing, Cloudflare Pages auto-deploys in 1–2 minutes
 - iPhone users: clear Safari cache after deploy (Settings → Safari → Clear History)
 
 ## Frame Extraction (if re-extracting from video)
@@ -196,11 +215,21 @@ done
 
 Source videos are 1292×1604, 4:5 aspect ratio, 24fps, ~5 seconds each.
 
+### Performance re-export (smaller frames → faster mobile first paint)
+Frames currently render at 1000px height / cwebp q80 (~21 KB each; hero = 2.6 MB).
+To cut ~30–40% off load weight, re-extract at 800px / q75. Run per section folder:
+```bash
+ffmpeg -y -i "1 - Hero.mp4" -vf "scale=-1:800:flags=lanczos" frames/hero/frame_%04d.png
+for f in frames/hero/*.png; do cwebp -q 75 "$f" -o "${f%.png}.webp" && rm "$f"; done
+```
+Frame *count* must stay 121/section. Visual quality at 800px/q75 is near-identical on phone canvases. Re-run for each of the 7 source videos (`1 - Hero` … `7 - CTA`).
+
 ## Open Items
 
-- [ ] **Domain:** `genc.training` — buy and connect via CNAME to GitHub Pages. Update Schema.org URL after.
+- [x] **Domain:** `gkelite.training` — live on Cloudflare Pages. All URLs updated.
 - [ ] **Google Business Profile** — Register as "Personal Trainer in Dubai" for Google Maps visibility
-- [ ] **Google Search Console** — Submit sitemap after domain is live
+- [ ] **Google Search Console** — Submit `sitemap.xml` for `gkelite.training`
+- [ ] **Performance:** Hero frames (121 = 2.6 MB) block the loader before first paint — slow on mobile cellular. Consider re-exporting frames smaller (q75 / 800px height) and/or releasing the loader after the first ~30 hero frames. See "Frame Extraction" below.
 
 ## What We Decided Against
 
