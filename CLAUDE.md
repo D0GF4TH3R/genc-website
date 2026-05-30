@@ -28,10 +28,12 @@ genc-website/
 ├── frames/
 │   ├── hero/           121 WebP frames (scroll-driven animation)
 │   ├── training/       121 WebP frames
+│   ├── virtual/        121 WebP frames
 │   ├── physio/         121 WebP frames
 │   ├── massage/        121 WebP frames
 │   ├── soccer/         121 WebP frames
-│   └── end/            121 WebP frames
+│   ├── end/            121 WebP frames (CTA / closer)
+│   └── easteregg/      169 WebP frames
 └── .gitignore
 ```
 
@@ -57,9 +59,10 @@ The site uses an Apple-style scroll-driven canvas animation. **NOT** a `<video>`
 Text transitions are delayed by 50% (`TD = 0.50`). Old text lingers into the next section's scroll range before fading out, and new text fades in after 50%. This prevents text/frame mismatch. **Do not change TD without understanding the cascade effect on all animations.**
 
 ### Gradient Sweep (Apple Intelligence style):
-Each headline starts black, then a multi-color gradient sweeps left-to-right through the text. Implemented via `background-clip: text` + animated `background-position`. Five custom gradients:
+Each headline starts black, then a multi-color gradient sweeps left-to-right through the text. Implemented via `background-clip: text` + animated `background-position`. Six custom gradients:
 - Hero: Apple Vibe (blue → purple → pink → orange)
 - Training: Cyberpunk (cyan → blue → pink → coral)
+- Virtual: Digital Glow (indigo → violet → purple → cyan)
 - Physio: Aurora (green → emerald → teal → violet)
 - Massage: Sunset (yellow → pink → magenta → dark violet)
 - Soccer: Berry (mint → light blue → pink → orange-red)
@@ -72,10 +75,13 @@ The sweep triggers when a headline becomes fully visible and resets when the sec
 |---|-----|------------|-------------|-------|
 | 0 | `s-hero` | Your Body. Your Gym. | Dein Körper. Dein Gym. | `#111111` |
 | 1 | `s-training` | Your gym comes to you. | Dein Gym kommt zu dir. | `#2D6A4F` |
-| 2 | `s-physio` | Fix it. Move better. | Lösen. Bewegen. Stärken. | `#007AFF` |
-| 3 | `s-massage` | Recovery is the strategy. | Recovery ist die Strategie. | `#D32F2F` |
-| 4 | `s-soccer` | Trained by a pro. | Trainiert vom Profi. | `#E8740C` |
-| 5 | `s-closer` | Ready when you are. | Bereit, wenn du es bist. | `#111111` |
+| 2 | `s-virtual` | Your session. Your screen. | Deine Session. Dein Screen. | `#4F46E5` |
+| 3 | `s-physio` | Fix it. Move better. | Lösen. Bewegen. Stärken. | `#007AFF` |
+| 4 | `s-massage` | Recovery is the strategy. | Recovery ist die Strategie. | `#D32F2F` |
+| 5 | `s-soccer` | Trained by a pro. | Trainiert vom Profi. | `#E8740C` |
+| 6 | `s-closer` | Ready when you are. | Bereit, wenn du es bist. | `#111111` |
+
+Frame folder → section mapping: `hero`→0, `training`→1, `virtual`→2, `physio`→3, `massage`→4, `soccer`→5, `end`→6 (CTA/closer). Source videos live in `Videos/` (`1 - Hero.mp4` … `7 - CTA.mp4`), numbered in display order.
 
 ## Design Tokens
 

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Genc Krasniqi — Your Body. Your Gym.</title>
-  <meta name="description" content="Bespoke personal training, EMS & football coaching. Swiss precision, delivered to your door in Dubai.">
+  <meta name="description" content="Bespoke training, physio & massage. Swiss precision, delivered to your door in Dubai.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://gkelite.training/">
   <meta name="theme-color" content="#ffffff">
@@ -12,7 +12,7 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Genc Krasniqi — Your Body. Your Gym.">
-  <meta property="og:description" content="Premium personal training, EMS, virtual coaching & football coaching in Dubai. Swiss-certified, delivered to your door.">
+  <meta property="og:description" content="Premium personal training, virtual coaching, physiotherapy, sports massage & football coaching in Dubai. Swiss-certified, delivered to your door.">
   <meta property="og:url" content="https://gkelite.training/">
   <meta property="og:image" content="https://gkelite.training/GK_Logo.png">
   <meta property="og:locale" content="en_US">
@@ -22,7 +22,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Genc Krasniqi — Your Body. Your Gym.">
-  <meta name="twitter:description" content="Premium personal training, EMS, virtual coaching & football coaching in Dubai.">
+  <meta name="twitter:description" content="Premium personal training, virtual coaching, physiotherapy, sports massage & football coaching in Dubai.">
   <meta name="twitter:image" content="https://gkelite.training/GK_Logo.png">
 
   <script type="application/ld+json">
@@ -30,7 +30,7 @@
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Genc Krasniqi — Personal Training & Physiotherapy",
-    "description": "Premium in-home personal training, EMS, virtual coaching, and football coaching in Dubai. Swiss-certified expertise delivered to your door.",
+    "description": "Premium in-home personal training, virtual coaching, physiotherapy, sports massage, and football coaching in Dubai. Swiss-certified expertise delivered to your door.",
     "url": "https://gkelite.training/",
     "telephone": "+41765687707",
     "email": "genc@gkelite.training",
@@ -69,15 +69,23 @@
           "itemOffered": {
             "@type": "Service",
             "name": "Virtual Training",
-            "description": "Live 1-on-1 training over video with real-time form correction"
+            "description": "Live 1-on-1 online training over video with real-time form correction"
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "EMS Training",
-            "description": "Wireless EMS personal training with Visionbody technology for full-body muscle activation"
+            "name": "Physiotherapy",
+            "description": "Swiss-certified physiotherapy at your home"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Sports Massage",
+            "description": "Deep-tissue sports massage for recovery"
           }
         },
         {
@@ -231,7 +239,59 @@
       opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
     }
     .about-modal.open { opacity: 1; pointer-events: auto; }
-    .about-img { display: block; width: 100%; height: auto; }
+    .about-inner { max-width: 600px; margin: 0 auto; padding: 84px 22px 110px; font-family: var(--font); }
+    .about-hero { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .about-photo-wrap {
+      width: 100%; max-width: 300px; aspect-ratio: 1 / 1.05;
+      border-radius: 28px; overflow: hidden; background: #F6F7F9;
+      box-shadow: 0 12px 44px rgba(0,0,0,0.10); margin-bottom: 22px;
+    }
+    .about-photo { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .about-title { font-weight: 600; font-size: clamp(2rem, 9vw, 2.6rem); letter-spacing: -0.02em; line-height: 1.05; }
+    .about-role { color: var(--grey); font-size: 0.92rem; line-height: 1.5; margin-top: 12px; max-width: 380px; }
+    .about-lead { color: #374151; font-size: 1rem; line-height: 1.72; text-align: center; margin: 26px auto 34px; max-width: 540px; }
+
+    .about-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .stat {
+      border-radius: 22px; padding: 20px 22px; min-height: 116px;
+      display: flex; flex-direction: column; justify-content: flex-end; gap: 5px;
+      background: #F6F7F9; border: 1px solid #ECEEF1;
+    }
+    .stat-wide { grid-column: 1 / -1; }
+    .stat-center { align-items: center; justify-content: center; text-align: center; min-height: 92px; }
+    .stat-num { font-size: clamp(1.9rem, 8vw, 2.4rem); font-weight: 600; line-height: 1; color: var(--black); }
+    .stat-label { font-size: 0.82rem; color: var(--grey); line-height: 1.35; }
+    .stat-strong { font-size: 1rem; font-weight: 600; color: var(--black); line-height: 1.3; }
+    .stat-sub { font-size: 0.72rem; color: #9CA3AF; line-height: 1.35; }
+    .stat-emoji { font-size: 1.7rem; line-height: 1; }
+    .stat-flags { font-size: 1.25rem; line-height: 1; letter-spacing: 2px; }
+    /* tints */
+    .stat-blue   { background: #EAF3FF; border-color: #DCEBFF; }
+    .stat-blue   .stat-num { color: var(--blue); }
+    .stat-pink   { background: #FDECEE; border-color: #F9DCDF; }
+    .stat-pink   .stat-num { color: var(--red); }
+    .stat-orange { background: #FFF2E6; border-color: #FBE4CE; }
+    .stat-orange .stat-num { color: var(--orange); }
+    .stat-mint   { background: #EAF4EE; border-color: #D9ECE2; }
+    /* filled */
+    .stat-green-fill { background: var(--green); border-color: var(--green); align-items: center; justify-content: center; text-align: center; }
+    .stat-red-fill   { background: var(--red);   border-color: var(--red);   align-items: center; justify-content: center; text-align: center; }
+    .stat-green-fill .stat-label, .stat-red-fill .stat-label { color: rgba(255,255,255,0.92); }
+    .stat-kicker { font-size: 0.95rem; font-weight: 500; color: rgba(255,255,255,0.85); }
+    .stat-headline { font-size: 1.45rem; font-weight: 600; color: #fff; line-height: 1.1; }
+    .stat-cross { font-size: 1.9rem; font-weight: 700; color: #fff; line-height: 1; }
+    .stat-label-w { font-size: 0.9rem; font-weight: 600; color: #fff; }
+    .stat-pill { display: inline-block; background: rgba(255,255,255,0.22); border-radius: 9999px; padding: 3px 16px; font-weight: 600; font-size: 1.15rem; color: #fff; }
+
+    .about-trusted { margin: 38px 0 6px; text-align: center; }
+    .about-trusted-label { font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: #9CA3AF; }
+    .about-brands { display: flex; justify-content: center; align-items: center; gap: 22px; flex-wrap: wrap; margin-top: 16px; }
+    .about-brands span { font-weight: 600; font-size: 1.05rem; color: #8A93A0; letter-spacing: 0.01em; }
+    .about-tagline { text-align: center; font-weight: 600; font-size: clamp(1.35rem, 5.5vw, 1.75rem); color: var(--green); letter-spacing: -0.01em; margin: 34px 0 28px; }
+    .about-cta-wrap { text-align: center; }
+    @media (min-width: 700px) {
+      .about-inner { max-width: 640px; }
+    }
 
     /* ── WHATSAPP FLOAT ── */
     .wa-float {
@@ -260,13 +320,7 @@
       background-position: 100% 0;
     }
     .text-body { font-size: clamp(0.9rem, 2.5vw, 1.05rem); line-height: 1.6; color: var(--grey); max-width: 460px; margin: 0 auto; }
-    .virtual-wrap { display: flex; align-items: center; gap: 14px; }
-    .virtual-text { flex: 1; min-width: 0; }
-    .virtual-text .text-body { margin: 0; }
-    .app-strip { display: flex; flex-direction: column; gap: 8px; padding-top: 4px; flex-shrink: 0; }
-    .app-chip { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
-    .app-chip svg { width: 20px; height: 20px; }
-.btn-contact {
+    .btn-contact {
       display: inline-flex; align-items: center; padding: 13px 34px;
       background: #0071E3; color: #fff; font-family: var(--font);
       font-size: 0.95rem; font-weight: 600; border-radius: 9999px;
@@ -384,13 +438,38 @@
       .nav-logo { height: calc(28px + 0.8vw); }
       .text-headline { font-size: calc(1.5rem + 1.5vw); }
       .text-body { font-size: calc(0.85rem + 0.2vw); }
-      .virtual-wrap { flex-direction: column; }
-      .app-strip { flex-direction: row; padding-top: 12px; }
       .btn-contact { font-size: calc(0.85rem + 0.1vw); padding: calc(12px + 0.15vw) calc(28px + 0.6vw); }
 
       .scroll-spacer { height: 180vh; }
       .scroll-spacer:first-child { height: 70vh; }
       .scroll-spacer:last-child { height: 180vh; }
+    }
+
+    /* ── RTL (Arabic) ─────────────────────────────────────────────── */
+    html[dir="rtl"] .text-body,
+    html[dir="rtl"] .about-lead,
+    html[dir="rtl"] .about-role,
+    html[dir="rtl"] .legal-section p { line-height: 1.9; }
+    /* Flip fixed buttons to the opposite corner */
+    html[dir="rtl"] .wa-float  { right: auto; left: 20px; }
+    html[dir="rtl"] .legal-close { right: auto; left: 20px; }
+    /* Keep Latin/numeric runs (brands, numbers, clubs) rendering left-to-right */
+    html[dir="rtl"] .stat-num,
+    html[dir="rtl"] .stat-flags,
+    html[dir="rtl"] .stat-strong,
+    html[dir="rtl"] .stat-sub,
+    html[dir="rtl"] .stat-kicker,
+    html[dir="rtl"] .stat-headline,
+    html[dir="rtl"] .stat-pill,
+    html[dir="rtl"] .about-brands { unicode-bidi: plaintext; }
+    html[dir="rtl"] [dir="ltr"] { unicode-bidi: isolate; }
+    /* Desktop two-column: mirror text→right, canvas→left */
+    @media (min-width: 1025px) {
+      html[dir="rtl"] .wa-float    { left: calc(50% - var(--col) / 2 + 20px); right: auto; }
+      html[dir="rtl"] .text-layer  { left: auto; right: 0; align-items: flex-end; }
+      html[dir="rtl"] .text-slide  { text-align: right; padding: 0 8vw 0 2vw; }
+      html[dir="rtl"] .canvas-layer { left: 0; right: 40%; }
+      html[dir="rtl"] .text-bg     { left: auto; right: 0; }
     }
   </style>
 </head>
@@ -415,8 +494,9 @@
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-section">
       <a href="#s-training" class="menu-link" data-menu-nav data-i18n="menu_training">Training</a>
-      <a href="#s-ems" class="menu-link" data-menu-nav data-i18n="menu_ems">EMS</a>
       <a href="#s-virtual" class="menu-link" data-menu-nav data-i18n="menu_virtual">Virtual</a>
+      <a href="#s-physio" class="menu-link" data-menu-nav data-i18n="menu_physio">Physio</a>
+      <a href="#s-massage" class="menu-link" data-menu-nav data-i18n="menu_massage">Massage</a>
       <a href="#s-soccer" class="menu-link" data-menu-nav data-i18n="menu_soccer">Soccer</a>
       <a href="#" class="menu-link" onclick="openAbout();return false;" data-i18n="menu_about">About Genc</a>
     </div>
@@ -426,11 +506,12 @@
     </div>
     <div class="menu-divider"></div>
     <div class="menu-section">
-      <a href="#" class="menu-small-link" onclick="openLegal('impressum');return false;">Impressum</a>
+      <a href="#" class="menu-small-link" onclick="openLegal('impressum');return false;" data-i18n="menu_impressum">Impressum</a>
       <a href="#" class="menu-small-link" onclick="openLegal('datenschutz');return false;" data-i18n="menu_datenschutz">Datenschutz</a>
       <div class="lang-toggle">
         <button class="lang-btn active" data-lang="en">EN</button>
         <button class="lang-btn" data-lang="de">DE</button>
+        <button class="lang-btn" data-lang="ar">ع</button>
       </div>
     </div>
   </div>
@@ -456,7 +537,86 @@
     <button class="legal-close" onclick="closeAbout()" aria-label="Close">
       <svg viewBox="0 0 24 24" fill="none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <img src="about-genc.webp" alt="About Genc — Former Swiss professional footballer, AIREX Mastertrainer, certified physiotherapist, personal trainer in Dubai" class="about-img">
+    <div class="about-inner">
+      <div class="about-hero">
+        <div class="about-photo-wrap">
+          <img src="frames/end/frame_0121.webp" alt="Genc Krasniqi — personal trainer, physiotherapist and former Swiss professional footballer in Dubai" class="about-photo">
+        </div>
+        <h2 class="about-title" data-i18n="about_title">About Genc</h2>
+        <p class="about-role" data-i18n="about_role">Former Swiss pro footballer · Dipl. Physiotherapeut FH · Personal trainer in Dubai</p>
+      </div>
+
+      <p class="about-lead" data-i18n="about_lead">Over 15 years in Swiss professional football — Grasshopper Club Zürich, FC Luzern, FC Winterthur and FC Rapperswil-Jona — shaped how Genc trains today. As a certified physiotherapist (Dipl. Physiotherapeut FH) and AIREX® Mastertrainer, he blends elite athletic conditioning with clinical recovery knowledge — delivered privately, at your home in Dubai.</p>
+
+      <div class="about-grid">
+        <div class="stat stat-green-fill stat-wide">
+          <span class="stat-kicker">AIREX®</span>
+          <span class="stat-headline">Mastertrainer</span>
+        </div>
+
+        <div class="stat stat-blue">
+          <span class="stat-num">15+</span>
+          <span class="stat-label" data-i18n="about_pro_football">years professional football</span>
+        </div>
+        <div class="stat stat-pink">
+          <span class="stat-num">9+</span>
+          <span class="stat-label" data-i18n="about_personal_training">years personal training</span>
+        </div>
+
+        <div class="stat stat-red-fill">
+          <span class="stat-cross">✚</span>
+          <span class="stat-label-w" data-i18n="about_swiss_certified">Swiss Certified</span>
+        </div>
+        <div class="stat stat-orange">
+          <span class="stat-num">70+</span>
+          <span class="stat-label" data-i18n="about_clients">clients trained</span>
+        </div>
+
+        <div class="stat stat-blue stat-wide">
+          <span class="stat-emoji">⚽</span>
+          <span class="stat-strong">Grasshopper Club Zürich</span>
+          <span class="stat-sub">FC Luzern · FC Winterthur · FC Rapperswil-Jona</span>
+        </div>
+
+        <div class="stat stat-mint">
+          <span class="stat-emoji">⚕️</span>
+          <span class="stat-strong">Dipl. Physiotherapeut FH</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">1.84m</span>
+          <span class="stat-label" data-i18n="about_athletic">Athletic build</span>
+        </div>
+
+        <div class="stat">
+          <span class="stat-flags">🇩🇪 🇬🇧 🇦🇱</span>
+          <span class="stat-strong">DE · EN · SQ</span>
+          <span class="stat-label" data-i18n="about_trilingual">Trilingual</span>
+        </div>
+        <div class="stat">
+          <span class="stat-emoji">🏠</span>
+          <span class="stat-strong" data-i18n="about_inhome">In-home service</span>
+          <span class="stat-label">Dubai</span>
+        </div>
+
+        <div class="stat stat-green-fill stat-wide stat-center">
+          <span class="stat-pill">3-in-1</span>
+          <span class="stat-label-w" data-i18n="about_3in1">Training + Physio + Massage</span>
+        </div>
+      </div>
+
+      <div class="about-trusted">
+        <span class="about-trusted-label" data-i18n="about_trusted">Trusted by</span>
+        <div class="about-brands">
+          <span>PwC</span><span>Lindt</span><span>Biogen</span><span>TUI</span>
+        </div>
+      </div>
+
+      <p class="about-tagline" data-i18n="about_tagline">Challenged. Never overwhelmed.</p>
+
+      <div class="about-cta-wrap">
+        <a href="https://wa.me/41765687707?text=Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="btn-contact wa-link" target="_blank" rel="noopener" data-i18n="cta">Contact Me</a>
+      </div>
+    </div>
   </div>
 
   <!-- ── SCROLL INDICATOR ── -->
@@ -484,28 +644,22 @@
         <p class="text-body" data-i18n="training_body">Bespoke in-home training that combines workouts, physio, and sports massage — all in one session. No gym. No commute. Just results.</p>
       </div>
       <div class="text-slide" data-idx="2">
-        <h2 class="text-headline" data-grad="2" data-i18n-html="ems_headline">More muscle.<br>Less time.</h2>
-        <p class="text-body" data-i18n="ems_body">Wireless EMS training powered by Visionbody — German-engineered, FDA-cleared, and guided by a pro. 98% muscle activation, 12 channels, 20 minutes. No cables, no gym, no wasted time.</p>
+        <h2 class="text-headline" data-grad="2" data-i18n-html="virtual_headline">Your session.<br>Your screen.</h2>
+        <p class="text-body" data-i18n="virtual_body">Live 1-on-1 training over video — with real-time form correction, personal programming, and the same intensity as an in-person session. No pre-recorded videos. Just you and your trainer.</p>
       </div>
       <div class="text-slide" data-idx="3">
-        <div class="virtual-wrap">
-          <div class="virtual-text">
-            <h2 class="text-headline" data-grad="3" data-i18n-html="virtual_headline">Your session.<br>Your screen.</h2>
-            <p class="text-body" data-i18n="virtual_body">Live 1-on-1 training over video — with real-time form correction, personal programming, and the same intensity as an in-person session. No pre-recorded videos. Just you and your trainer.</p>
-          </div>
-          <div class="app-strip">
-            <div class="app-chip" style="background:#2D8CFF;"><svg viewBox="0 0 24 24" fill="white"><path d="M5.033 14.649H.743a.74.74 0 0 1-.686-.458.74.74 0 0 1 .16-.808L3.19 10.41H1.06A1.06 1.06 0 0 1 0 9.35h3.957c.301 0 .57.18.686.458a.74.74 0 0 1-.161.808L1.51 13.59h2.464c.585 0 1.06.475 1.06 1.06zM24 11.338c0-1.14-.927-2.066-2.066-2.066-.61 0-1.158.265-1.537.686a2.061 2.061 0 0 0-1.536-.686c-1.14 0-2.066.926-2.066 2.066v3.311a1.06 1.06 0 0 0 1.06-1.06v-2.251a1.004 1.004 0 0 1 2.013 0v2.251c0 .586.474 1.06 1.06 1.06v-3.311a1.004 1.004 0 0 1 2.012 0v2.251c0 .586.475 1.06 1.06 1.06zM16.265 12a2.728 2.728 0 1 1-5.457 0 2.728 2.728 0 0 1 5.457 0zm-1.06 0a1.669 1.669 0 1 0-3.338 0 1.669 1.669 0 0 0 3.338 0zm-4.82 0a2.728 2.728 0 1 1-5.458 0 2.728 2.728 0 0 1 5.457 0zm-1.06 0a1.669 1.669 0 1 0-3.338 0 1.669 1.669 0 0 0 3.338 0z"/></svg></div>
-            <div class="app-chip" style="background:linear-gradient(135deg,#6ADF5E,#30B84A);"><svg viewBox="0 0 24 24" fill="white"><rect x="3" y="6.5" width="12" height="11" rx="2"/><path d="M16 10l4.5-3v10L16 14z"/></svg></div>
-            <div class="app-chip" style="background:#fff; border:1px solid #e5e7eb;"><svg viewBox="0 0 24 24"><path fill="#00897B" d="M5.53 2.13 0 7.75h5.53zm.398 0v5.62h7.608v3.65l5.47-4.45c-.014-1.22.031-2.25-.025-3.46-.148-1.09-1.287-1.47-2.236-1.36z"/><path fill="#0066DA" d="M23.1 4.32c-.802.295-1.358.995-2.047 1.49-2.506 2.05-4.982 4.12-7.468 6.19 3.025 2.59 6.04 5.18 9.065 7.76 1.218.671 1.428-.814 1.328-1.64v-13a.828.828 0 0 0-.877-.825z"/><path fill="#00897B" d="M.038 8.15v7.7h5.53v-7.7z"/><path fill="#00AC47" d="M13.577 16.25H6.008v5.62c3.864-.006 7.737.011 11.58-.009 1.02-.07 1.618-1.12 1.468-2.07v-2.51l-5.47-4.68v3.65z"/><path fill="#EA4335" d="M.038 16.25c.02 1.44-.041 2.88.033 4.31.162.948 1.158 1.43 2.047 1.31h3.464v-5.62z"/><path fill="#FFBA00" d="M5.53 2.13 0 7.75h5.53z"/></svg></div>
-            <div class="app-chip" style="background:#5059C9;"><svg viewBox="0 0 24 24" fill="white"><path d="M20.625 8.127q-.55 0-1.025-.205-.475-.205-.832-.563-.358-.357-.563-.832Q18 6.053 18 5.502q0-.54.205-1.02t.563-.837q.357-.358.832-.563.474-.205 1.025-.205.54 0 1.02.205t.837.563q.358.357.563.837.205.48.205 1.02 0 .55-.205 1.025-.205.475-.563.832-.357.358-.837.563-.48.205-1.02.205zm0-3.75q-.469 0-.797.328-.328.328-.328.797 0 .469.328.797.328.328.797.328.469 0 .797-.328.328-.328.328-.797 0-.469-.328-.797-.328-.328-.797-.328zM24 10.002v5.578q0 .774-.293 1.46-.293.685-.803 1.194-.51.51-1.195.803-.686.293-1.459.293-.445 0-.908-.105-.463-.106-.85-.329-.293.95-.855 1.729-.563.78-1.319 1.336-.756.557-1.67.861-.914.305-1.898.305-1.148 0-2.162-.398-1.014-.399-1.805-1.102-.79-.703-1.312-1.664t-.674-2.086h-5.8q-.411 0-.704-.293T0 16.881V6.873q0-.41.293-.703t.703-.293h8.59q-.34-.715-.34-1.5 0-.727.275-1.365.276-.639.75-1.114.475-.474 1.114-.75.638-.275 1.365-.275t1.365.275q.639.276 1.114.75.474.475.75 1.114.275.638.275 1.365t-.275 1.365q-.276.639-.75 1.113-.475.475-1.114.75-.638.276-1.365.276-.188 0-.375-.024-.188-.023-.375-.058v1.078h10.875q.469 0 .797.328.328.328.328.797zM12.75 2.373q-.41 0-.78.158-.368.158-.638.434-.27.275-.428.639-.158.363-.158.773 0 .41.158.78.159.368.428.638.27.27.639.428.369.158.779.158.41 0 .773-.158.364-.159.64-.428.274-.27.433-.639.158-.369.158-.779 0-.41-.158-.773-.159-.364-.434-.64-.275-.275-.639-.433-.363-.158-.773-.158zM6.937 9.814h2.25V7.94H2.814v1.875h2.25v6h1.875zm10.313 7.313v-6.75H12v6.504q0 .41-.293.703t-.703.293H8.309q.152.809.556 1.5.405.691.985 1.19.58.497 1.318.779.738.281 1.582.281.926 0 1.746-.352.82-.351 1.436-.966.615-.616.966-1.43.352-.815.352-1.752zm5.25-1.547v-5.203h-3.75v6.855q.305.305.691.452.387.146.809.146.469 0 .879-.176.41-.175.715-.48.304-.305.48-.715t.176-.879Z"/></svg></div>
-          </div>
-        </div>
+        <h2 class="text-headline" data-grad="3" data-i18n-html="physio_headline">Fix it. Move better.</h2>
+        <p class="text-body" data-i18n="physio_body">Swiss-certified physiotherapy that releases blockages, restores mobility, and builds long-term resilience — at your home.</p>
       </div>
       <div class="text-slide" data-idx="4">
-        <h2 class="text-headline" data-grad="4" data-i18n="soccer_headline">Trained by a pro.</h2>
-        <p class="text-body" data-i18n="soccer_body">Tactics, speed, and ball control — coached by a former Swiss professional footballer. Sessions that sharpen every aspect of your game.</p>
+        <h2 class="text-headline" data-grad="4" data-i18n-html="massage_headline">Recovery is<br>the strategy.</h2>
+        <p class="text-body" data-i18n="massage_body">Deep-tissue sports massage that releases tension, accelerates recovery, and prepares your body for what's next.</p>
       </div>
       <div class="text-slide" data-idx="5">
+        <h2 class="text-headline" data-grad="5" data-i18n="soccer_headline">Trained by a pro.</h2>
+        <p class="text-body" data-i18n="soccer_body">Tactics, speed, and ball control — coached by a former Swiss professional footballer. Sessions that sharpen every aspect of your game.</p>
+      </div>
+      <div class="text-slide" data-idx="6">
         <h2 class="text-headline c-black" data-i18n="closer_headline">Ready when you are.</h2>
         <a href="https://wa.me/41765687707?text=Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services." class="btn-contact wa-link" target="_blank" rel="noopener" data-i18n="cta">Contact Me</a>
       </div>
@@ -520,10 +674,11 @@
   <div class="scroll-track">
     <div class="scroll-spacer" id="s-hero" data-section="0"></div>
     <div class="scroll-spacer" id="s-training" data-section="1"></div>
-    <div class="scroll-spacer" id="s-ems" data-section="2"></div>
-    <div class="scroll-spacer" id="s-virtual" data-section="3"></div>
-    <div class="scroll-spacer" id="s-soccer" data-section="4"></div>
-    <div class="scroll-spacer" id="s-closer" data-section="5"></div>
+    <div class="scroll-spacer" id="s-virtual" data-section="2"></div>
+    <div class="scroll-spacer" id="s-physio" data-section="3"></div>
+    <div class="scroll-spacer" id="s-massage" data-section="4"></div>
+    <div class="scroll-spacer" id="s-soccer" data-section="5"></div>
+    <div class="scroll-spacer" id="s-closer" data-section="6"></div>
   </div>
 
   <!-- Extra scroll runway: lets the CTA "breathe" at the end -->
@@ -542,19 +697,21 @@
     const GRADS = [
       ['#2ea8ff','#b258ff','#ff3b7c','#ff8e25'],  // 0: Hero — Apple Vibe
       ['#00f2fe','#4facfe','#f093fb','#f5576c'],  // 1: Training — Cyberpunk
-      ['#00f0ff','#7c3aed','#f0abfc','#ff6b6b'],  // 2: EMS — Electric Pulse
-      ['#4F46E5','#6366F1','#8B5CF6','#06B6D4'],  // 3: Virtual — Digital Glow
-      ['#84fab0','#8fd3f4','#d399c1','#ff4b1f'],  // 4: Soccer — Berry
+      ['#4F46E5','#6366F1','#8B5CF6','#06B6D4'],  // 2: Virtual — Digital Glow
+      ['#11998e','#38ef7d','#0eb2c0','#7b2ff7'],  // 3: Physio — Aurora
+      ['#fee140','#fa709a','#bf089a','#2a0845'],  // 4: Massage — Sunset
+      ['#84fab0','#8fd3f4','#d399c1','#ff4b1f'],  // 5: Soccer — Berry
     ];
-    const gradState = [0, 0, 0, 0, 0];
+    const gradState = [0, 0, 0, 0, 0, 0];
     const GRAD_SPEED = 0.018;
     const FADE_SPEED = 0.04;
 
     const SECTIONS = [
       { key: 'hero',     folder: 'frames/hero/'     },
       { key: 'training', folder: 'frames/training/' },
-      { key: 'ems',      folder: 'frames/ems/'      },
       { key: 'virtual',  folder: 'frames/virtual/'  },
+      { key: 'physio',   folder: 'frames/physio/'   },
+      { key: 'massage',  folder: 'frames/massage/'  },
       { key: 'soccer',   folder: 'frames/soccer/'   },
       { key: 'end',      folder: 'frames/end/'      },
     ];
@@ -857,10 +1014,11 @@
     const T = {
       en: {
         page_title: 'Genc Krasniqi — Your Body. Your Gym.',
-        meta_desc: 'Bespoke personal training, EMS & football coaching. Swiss precision, delivered to your door in Dubai.',
+        meta_desc: 'Bespoke training, physio & massage. Swiss precision, delivered to your door in Dubai.',
         menu_training: 'Training',
-        menu_ems: 'EMS',
         menu_virtual: 'Virtual',
+        menu_physio: 'Physio',
+        menu_massage: 'Massage',
         menu_soccer: 'Soccer',
         menu_about: 'About Genc',
         cta: 'Contact Me',
@@ -868,22 +1026,39 @@
         hero_body: 'Bespoke training, physio &amp; massage.<br>Swiss precision, delivered to your door.',
         training_headline: 'Your gym<br>comes to you.',
         training_body: 'Bespoke in-home training that combines workouts, physio, and sports massage — all in one session. No gym. No commute. Just results.',
-        ems_headline: 'More muscle.<br>Less time.',
-        ems_body: 'Wireless EMS training powered by Visionbody \u2014 German-engineered, FDA-cleared, and guided by a pro. 98% muscle activation, 12 channels, 20 minutes. No cables, no gym, no wasted time.',
         virtual_headline: 'Your session.<br>Your screen.',
-        virtual_body: 'Live 1-on-1 training over video \u2014 with real-time form correction, personal programming, and the same intensity as an in-person session. No pre-recorded videos. Just you and your trainer.',
+        virtual_body: 'Live 1-on-1 training over video — with real-time form correction, personal programming, and the same intensity as an in-person session. No pre-recorded videos. Just you and your trainer.',
+        physio_headline: 'Fix it. Move better.',
+        physio_body: 'Swiss-certified physiotherapy that releases blockages, restores mobility, and builds long-term resilience \u2014 at your home.',
+        massage_headline: 'Recovery is<br>the strategy.',
+        massage_body: 'Deep-tissue sports massage that releases tension, accelerates recovery, and prepares your body for what\u2019s next.',
         soccer_headline: 'Trained by a pro.',
         soccer_body: 'Tactics, speed, and ball control — coached by a former Swiss professional footballer. Sessions that sharpen every aspect of your game.',
         closer_headline: 'Ready when you are.',
+        about_title: 'About Genc',
+        about_role: 'Former Swiss pro footballer · Dipl. Physiotherapeut FH · Personal trainer in Dubai',
+        about_lead: 'Over 15 years in Swiss professional football — Grasshopper Club Zürich, FC Luzern, FC Winterthur and FC Rapperswil-Jona — shaped how Genc trains today. As a certified physiotherapist (Dipl. Physiotherapeut FH) and AIREX® Mastertrainer, he blends elite athletic conditioning with clinical recovery knowledge — delivered privately, at your home in Dubai.',
+        about_pro_football: 'years professional football',
+        about_personal_training: 'years personal training',
+        about_swiss_certified: 'Swiss Certified',
+        about_clients: 'clients trained',
+        about_athletic: 'Athletic build',
+        about_trilingual: 'Trilingual',
+        about_inhome: 'In-home service',
+        about_3in1: 'Training + Physio + Massage',
+        about_trusted: 'Trusted by',
+        about_tagline: 'Challenged. Never overwhelmed.',
+        menu_impressum: 'Imprint',
         menu_datenschutz: 'Privacy Policy',
         wa_text: 'Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services.',
       },
       de: {
         page_title: 'Genc Krasniqi — Dein Körper. Dein Gym.',
-        meta_desc: 'Massgeschneidertes Personal Training, EMS & Fussball-Coaching. Schweizer Pr\u00e4zision, direkt zu dir nach Dubai.',
+        meta_desc: 'Massgeschneidertes Training, Physio & Massage. Schweizer Pr\u00e4zision, direkt zu dir nach Dubai.',
         menu_training: 'Training',
-        menu_ems: 'EMS',
         menu_virtual: 'Virtual',
+        menu_physio: 'Physio',
+        menu_massage: 'Massage',
         menu_soccer: 'Fussball',
         menu_about: 'Über Genc',
         cta: 'Kontaktiere mich',
@@ -891,15 +1066,71 @@
         hero_body: 'Massgeschneidertes Training, Physio &amp; Massage.<br>Schweizer Präzision, direkt zu dir.',
         training_headline: 'Dein Gym<br>kommt zu dir.',
         training_body: 'Massgeschneidertes In-Home Training — Workouts, Physio und Sportmassage in einer Session. Kein Gym. Kein Pendeln. Nur Resultate.',
-        ems_headline: 'Mehr Muskel.<br>Weniger Zeit.',
-        ems_body: 'Kabelloses EMS-Training mit Visionbody \u2014 German-engineered, FDA-zertifiziert und angeleitet vom Profi. 98% Muskelaktivierung, 12 Kan\u00e4le, 20 Minuten. Keine Kabel, kein Gym, keine verlorene Zeit.',
         virtual_headline: 'Deine Session.<br>Dein Screen.',
-        virtual_body: 'Live 1-on-1 Training per Video \u2014 mit Echtzeit-Korrektur, individuellem Programm und der gleichen Intensität wie vor Ort. Keine aufgezeichneten Videos. Nur du und dein Trainer.',
+        virtual_body: 'Live 1-on-1 Training per Video — mit Echtzeit-Korrektur, individuellem Programm und der gleichen Intensität wie vor Ort. Keine aufgezeichneten Videos. Nur du und dein Trainer.',
+        physio_headline: 'L\u00f6sen. Bewegen. St\u00e4rken.',
+        physio_body: 'Diplomierte Physiotherapie, die Blockaden l\u00f6st, Mobilit\u00e4t wiederherstellt und langfristige Belastbarkeit aufbaut \u2014 bei dir zuhause.',
+        massage_headline: 'Recovery ist<br>die Strategie.',
+        massage_body: 'Tiefenwirksame Sportmassage, die Verspannungen l\u00f6st, die Regeneration beschleunigt und deinen K\u00f6rper auf das N\u00e4chste vorbereitet.',
         soccer_headline: 'Trainiert vom Profi.',
         soccer_body: 'Taktik, Schnelligkeit und Ballkontrolle — gecoacht von einem ehemaligen Schweizer Profifussballer. Sessions, die jedes Element deines Spiels schärfen.',
         closer_headline: 'Bereit, wenn du es bist.',
+        about_title: 'Über Genc',
+        about_role: 'Ehem. Schweizer Profifussballer · Dipl. Physiotherapeut FH · Personal Trainer in Dubai',
+        about_lead: 'Über 15 Jahre im Schweizer Profifussball — Grasshopper Club Zürich, FC Luzern, FC Winterthur und FC Rapperswil-Jona — prägen, wie Genc heute trainiert. Als diplomierter Physiotherapeut (Dipl. Physiotherapeut FH) und AIREX® Mastertrainer verbindet er Spitzensport-Konditionierung mit klinischem Recovery-Wissen — privat, bei dir zuhause in Dubai.',
+        about_pro_football: 'Jahre Profifussball',
+        about_personal_training: 'Jahre Personal Training',
+        about_swiss_certified: 'Schweizer Diplom',
+        about_clients: 'Kunden trainiert',
+        about_athletic: 'Athletischer Körperbau',
+        about_trilingual: 'Dreisprachig',
+        about_inhome: 'In-Home Service',
+        about_3in1: 'Training + Physio + Massage',
+        about_trusted: 'Vertraut von',
+        about_tagline: 'Gefordert. Nie überfordert.',
+        menu_impressum: 'Impressum',
         menu_datenschutz: 'Datenschutz',
         wa_text: 'Hallo%20Genc%2C%20ich%20m%C3%B6chte%20gerne%20mehr%20%C3%BCber%20deine%20Services%20erfahren.',
+      },
+      ar: {
+        page_title: 'جينك كراسنيكي — جسدك. صالتك الرياضية.',
+        meta_desc: 'تدريب شخصي وعلاج طبيعي وتدليك بمعايير سويسرية — يصل إلى باب منزلك في دبي.',
+        menu_training: 'التدريب',
+        menu_virtual: 'افتراضي',
+        menu_physio: 'علاج طبيعي',
+        menu_massage: 'تدليك',
+        menu_soccer: 'كرة القدم',
+        menu_about: 'عن جينك',
+        cta: 'تواصل معي',
+        hero_headline: 'جسدك.<br>صالتك الرياضية.',
+        hero_body: 'تدريب وعلاج طبيعي وتدليك مُصمَّم خصيصاً لك.<br>دقّة سويسرية، تصل إلى باب منزلك.',
+        training_headline: 'صالتك الرياضية<br>تأتي إليك.',
+        training_body: 'تدريب منزلي مُصمَّم خصيصاً يجمع بين التمارين والعلاج الطبيعي والتدليك الرياضي في جلسة واحدة. لا صالة. لا تنقّل. نتائج فقط.',
+        virtual_headline: 'جلستك.<br>على شاشتك.',
+        virtual_body: 'تدريب فردي مباشر عبر الفيديو — مع تصحيح فوري للأداء، وبرنامج شخصي، وبالحماس نفسه كجلسة حضورية. لا مقاطع مسجَّلة. أنت ومدرّبك فقط.',
+        physio_headline: 'عالِج الألم.<br>تحرّك بشكل أفضل.',
+        physio_body: 'علاج طبيعي بشهادة سويسرية يفكّ الانسدادات، ويستعيد الحركة، ويبني قدرة تحمّل طويلة الأمد — في منزلك.',
+        massage_headline: 'التعافي<br>هو الاستراتيجية.',
+        massage_body: 'تدليك رياضي عميق يفكّ التوتر، ويسرّع التعافي، ويُهيّئ جسدك لما هو قادم.',
+        soccer_headline: 'تدرَّب على يد محترف.',
+        soccer_body: 'التكتيك والسرعة والتحكّم بالكرة — بإشراف لاعب كرة قدم سويسري محترف سابق. جلسات تصقل كل جانب من لعبك.',
+        closer_headline: 'جاهز عندما تكون أنت كذلك.',
+        about_title: 'عن جينك',
+        about_role: 'لاعب كرة قدم سويسري محترف سابق · أخصائي علاج طبيعي مُعتمد (Dipl. Physiotherapeut FH) · مدرّبك الشخصي في دبي',
+        about_lead: 'أكثر من 15 عاماً في كرة القدم السويسرية الاحترافية — مع Grasshopper Club Zürich وFC Luzern وFC Winterthur وFC Rapperswil-Jona — شكّلت طريقة تدريب جينك اليوم. وبصفته أخصائي علاج طبيعي مُعتمد (Dipl. Physiotherapeut FH) ومدرّب AIREX® رئيسي، يجمع بين الإعداد البدني للنخبة ومعرفة التعافي السريري — يُقدَّم بخصوصية، في منزلك بدبي.',
+        about_pro_football: 'عاماً في كرة القدم الاحترافية',
+        about_personal_training: 'سنوات في التدريب الشخصي',
+        about_swiss_certified: 'شهادة سويسرية',
+        about_clients: 'عميل تم تدريبه',
+        about_athletic: 'بنية رياضية',
+        about_trilingual: 'ثلاثي اللغات',
+        about_inhome: 'خدمة منزلية',
+        about_3in1: 'تدريب + علاج طبيعي + تدليك',
+        about_trusted: 'موضع ثقة',
+        about_tagline: 'تحدٍّ بلا إرهاق.',
+        menu_impressum: 'بيانات الناشر',
+        menu_datenschutz: 'سياسة الخصوصية',
+        wa_text: '%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D9%8B%20%D8%AC%D9%8A%D9%86%D9%83%D8%8C%20%D8%A3%D9%88%D8%AF%D9%91%20%D9%85%D8%B9%D8%B1%D9%81%D8%A9%20%D8%A7%D9%84%D9%85%D8%B2%D9%8A%D8%AF%20%D8%B9%D9%86%20%D8%AE%D8%AF%D9%85%D8%A7%D8%AA%D9%83.',
       }
     };
 
@@ -944,6 +1175,26 @@
           <div class="legal-section"><h3>6. Ihre Rechte</h3><p>Sie haben jederzeit das Recht, Auskunft über Ihre gespeicherten Daten zu erhalten, deren Berichtigung oder Löschung zu verlangen. Bitte kontaktieren Sie uns hierfür über WhatsApp oder E-Mail.</p></div>
           <div class="legal-section"><h3>7. Schlussbestimmungen</h3><p>Diese Datenschutzbestimmungen können von Zeit zu Zeit angepasst werden. Mit jedem neuen Besuch der Webseite gilt die jeweils aktuelle, abrufbare Version.</p></div>
           <div class="legal-copyright">&copy; ${new Date().getFullYear()} Genc Krasniqi. Alle Rechte vorbehalten.</div>`
+      },
+      ar: {
+        impressum: `
+          <h2 class="legal-title">بيانات الناشر</h2>
+          <div class="legal-section"><h3>معلومات الاتصال</h3><p>Genc Krasniqi<br>دبي، الإمارات العربية المتحدة<br>واتساب: <a dir="ltr" href="https://wa.me/41765687707">+41 76 568 77 07</a><br>البريد الإلكتروني: <a dir="ltr" href="mailto:genc@gkelite.training">genc@gkelite.training</a></p></div>
+          <div class="legal-section"><h3>المسؤول عن المحتوى</h3><p>Genc Krasniqi</p></div>
+          <div class="legal-section"><h3>إخلاء المسؤولية</h3><p>لا يتحمّل المؤلف أي مسؤولية عن دقّة المحتوى المُقدَّم أو اكتماله أو حداثته. تُستبعَد أي مطالبات بالمسؤولية تجاه المؤلف عن أضرار مادية أو معنوية تنشأ عن الوصول إلى المعلومات المنشورة أو استخدامها. جميع العروض غير مُلزِمة. ويحتفظ المؤلف صراحةً بحقّ تغيير أجزاء من الموقع أو العرض بأكمله أو استكمالها أو حذفها دون إشعار مسبق.</p></div>
+          <div class="legal-section"><h3>المسؤولية عن الروابط</h3><p>تقع الإحالات والروابط إلى مواقع الأطراف الثالثة خارج نطاق مسؤوليتنا. ولا نتحمّل أي مسؤولية عن تلك المواقع. ويتمّ الوصول إلى تلك المواقع واستخدامها على مسؤولية المستخدم الخاصة.</p></div>
+          <div class="legal-section"><h3>حقوق النشر</h3><p>تعود حقوق النشر وجميع الحقوق الأخرى للمحتوى والصور والملفات على هذا الموقع حصراً إلى Genc Krasniqi أو إلى أصحاب الحقوق المذكورين تحديداً. ويجب الحصول مسبقاً على موافقة خطية من صاحب الحقوق لإعادة إنتاج أي عنصر.</p></div>
+          <div class="legal-copyright">&copy; ${new Date().getFullYear()} Genc Krasniqi. جميع الحقوق محفوظة.</div>`,
+        datenschutz: `
+          <h2 class="legal-title">سياسة الخصوصية</h2>
+          <div class="legal-section"><h3>١. عام</h3><p>يحترم Genc Krasniqi خصوصية جميع مستخدمي هذا الموقع. توضّح سياسة الخصوصية هذه البيانات التي تُجمَع وكيفية استخدامها. ولا تُعالَج البيانات الشخصية إلا للأغراض التي قُدِّمت من أجلها.</p></div>
+          <div class="legal-section"><h3>٢. جمع البيانات</h3><p>لا يستخدم هذا الموقع أي ملفات تعريف ارتباط (Cookies) أو أدوات تتبّع أو خدمات تحليل أو أي شكل من أشكال جمع البيانات الآلي. ولا تُجمَع أي بيانات شخصية مثل الاسم أو العنوان أو رقم الهاتف أو البريد الإلكتروني تلقائياً. وتُعالَج البيانات الشخصية فقط عندما تتواصل معنا طوعاً عبر واتساب أو البريد الإلكتروني.</p></div>
+          <div class="legal-section"><h3>٣. الاستضافة</h3><p>يُستضاف هذا الموقع على Cloudflare Pages. وقد تجمع Cloudflare بيانات وصول تقنية (مثل عنوان IP ونوع المتصفّح ووقت الوصول) في ملفات سجلّ الخادم. ولا تُربَط هذه البيانات بأي معلومات شخصية، وتُعالَجها Cloudflare وفقاً لسياسة الخصوصية الخاصة بها.</p></div>
+          <div class="legal-section"><h3>٤. التواصل عبر واتساب</h3><p>عند التواصل معنا عبر واتساب، تُعالَج رسالتك ورقم هاتفك من خلال واتساب (Meta Platforms, Inc.). وتسري سياسة الخصوصية الخاصة بواتساب على هذا التواصل. ونستخدم المعلومات التي تقدّمها حصراً للردّ على استفسارك.</p></div>
+          <div class="legal-section"><h3>٥. مشاركة البيانات</h3><p>لن تُشارَك بياناتك الشخصية مع أطراف ثالثة ما لم تُعطِ موافقتك على ذلك أو ما لم نكن مُلزَمين قانوناً بذلك.</p></div>
+          <div class="legal-section"><h3>٦. حقوقك</h3><p>يحقّ لك في أي وقت طلب الاطّلاع على بياناتك المُخزَّنة أو تصحيحها أو حذفها. يُرجى التواصل معنا لهذا الغرض عبر واتساب أو البريد الإلكتروني.</p></div>
+          <div class="legal-section"><h3>٧. أحكام ختامية</h3><p>قد تُحدَّث سياسة الخصوصية هذه من وقت لآخر. ومع كل زيارة جديدة للموقع، يسري الإصدار الحالي المتاح.</p></div>
+          <div class="legal-copyright">&copy; ${new Date().getFullYear()} Genc Krasniqi. جميع الحقوق محفوظة.</div>`
       }
     };
 
@@ -986,6 +1237,7 @@
       const t = T[lang];
 
       document.documentElement.lang = lang;
+      document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
       document.title = t.page_title;
       document.querySelector('meta[name="description"]').content = t.meta_desc;
 
@@ -1006,16 +1258,20 @@
         btn.classList.toggle('active', btn.dataset.lang === lang);
       });
 
+      renderLegal();
+
       try { localStorage.setItem('genc-lang', lang); } catch(e) {}
     }
 
     function detectLang() {
       try {
         const saved = localStorage.getItem('genc-lang');
-        if (saved === 'de' || saved === 'en') return saved;
+        if (saved === 'de' || saved === 'en' || saved === 'ar') return saved;
       } catch(e) {}
       const sysLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-      return sysLang.startsWith('de') ? 'de' : 'en';
+      if (sysLang.startsWith('ar')) return 'ar';
+      if (sysLang.startsWith('de')) return 'de';
+      return 'en';
     }
 
     document.querySelectorAll('.lang-btn').forEach(btn => {
