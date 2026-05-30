@@ -394,6 +394,11 @@
       pointer-events: none;
     }
     .scroll-hint.visible { opacity: 1; }
+    .scroll-hint-label {
+      font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--grey); font-weight: 500; opacity: 0.85;
+    }
+    html[dir="rtl"] .scroll-hint-label { letter-spacing: normal; text-transform: none; }
     .scroll-hint svg {
       width: 32px; height: 32px; stroke: var(--grey); stroke-width: 1.5;
       fill: none; stroke-linecap: round; stroke-linejoin: round;
@@ -652,6 +657,7 @@
 
   <!-- ── SCROLL INDICATOR ── -->
   <div class="scroll-hint" id="scrollHint">
+    <span class="scroll-hint-label" data-i18n="scroll_hint">Scroll</span>
     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
   </div>
 
@@ -798,7 +804,7 @@
       });
     }
 
-    // ── Hero auto-play animation
+    // ── Hero auto-play animation (skippable — any scroll/swipe intent ends it instantly)
     function playHero() {
       return new Promise(resolve => {
         const frames = allFrames[0];
@@ -809,10 +815,33 @@
         window.scrollTo(0, 0);
 
         let frameIdx = 0;
+        let skip = false;
         const interval = 1000 / HERO_FPS;
         let lastTime = performance.now();
 
+        // Let the user take over immediately: the first scroll, swipe or key
+        // press jumps straight to the end and unlocks the page.
+        const onIntent = () => { skip = true; };
+        const tsOpts = { passive: true };
+        addEventListener('wheel', onIntent, tsOpts);
+        addEventListener('touchstart', onIntent, tsOpts);
+        addEventListener('touchmove', onIntent, tsOpts);
+        addEventListener('keydown', onIntent);
+
+        function finish() {
+          removeEventListener('wheel', onIntent, tsOpts);
+          removeEventListener('touchstart', onIntent, tsOpts);
+          removeEventListener('touchmove', onIntent, tsOpts);
+          removeEventListener('keydown', onIntent);
+          draw(frames[frames.length - 1]);
+          heroPlaying = false;
+          heroDone = true;
+          document.body.style.overflow = '';
+          resolve();
+        }
+
         function animate(now) {
+          if (skip) { finish(); return; }
           const delta = now - lastTime;
           if (delta >= interval) {
             lastTime = now - (delta % interval);
@@ -822,11 +851,7 @@
           if (frameIdx < frames.length) {
             requestAnimationFrame(animate);
           } else {
-            draw(frames[frames.length - 1]);
-            heroPlaying = false;
-            heroDone = true;
-            document.body.style.overflow = '';
-            resolve();
+            finish();
           }
         }
 
@@ -847,10 +872,10 @@
       texts[0].style.opacity = 1;
       texts[0].style.transform = 'translateY(0)';
 
-      await playHero();
-
+      // Show the scroll cue early — during the intro — so it's clear you can
+      // scroll right away (scrolling also skips the intro animation).
       const scrollHint = document.getElementById('scrollHint');
-      setTimeout(() => scrollHint.classList.add('visible'), 600);
+      setTimeout(() => scrollHint.classList.add('visible'), 900);
 
       const hideHint = () => {
         if (scrollY > 10) {
@@ -859,6 +884,8 @@
         }
       };
       addEventListener('scroll', hideHint, { passive: true });
+
+      await playHero();
 
       isReady = true;
       curSec = 0;
@@ -1044,8 +1071,8 @@
     // ── i18n
     const T = {
       en: {
-        page_title: 'Genc Krasniqi — Your Body. Your Gym.',
-        meta_desc: 'Bespoke training, physio & massage. Swiss precision, delivered to your door in Dubai.',
+        page_title: 'Genc Krasniqi — Personal Trainer & Physiotherapist in Dubai',
+        meta_desc: 'Bespoke in-home personal training, physiotherapy & sports massage in Dubai. Swiss precision, delivered to your door.',
         menu_training: 'Training',
         menu_virtual: 'Virtual',
         menu_physio: 'Physio',
@@ -1053,6 +1080,7 @@
         menu_soccer: 'Soccer',
         menu_about: 'About Genc',
         cta: 'Contact Me',
+        scroll_hint: 'Scroll',
         hero_headline: 'Your Body.<br>Your Gym.',
         hero_body: 'Bespoke training, physio &amp; massage.<br>Swiss precision, delivered to your door.',
         training_headline: 'Your gym<br>comes to you.',
@@ -1084,8 +1112,8 @@
         wa_text: 'Hi%20Genc%2C%20I%27d%20like%20to%20learn%20more%20about%20your%20services.',
       },
       de: {
-        page_title: 'Genc Krasniqi — Dein Körper. Dein Gym.',
-        meta_desc: 'Massgeschneidertes Training, Physio & Massage. Schweizer Pr\u00e4zision, direkt zu dir nach Dubai.',
+        page_title: 'Genc Krasniqi — Personal Trainer & Physiotherapeut in Dubai',
+        meta_desc: 'Massgeschneidertes Personal Training, Physiotherapie & Sportmassage in Dubai. Schweizer Pr\u00e4zision, direkt zu dir nach Hause.',
         menu_training: 'Training',
         menu_virtual: 'Virtual',
         menu_physio: 'Physio',
@@ -1093,6 +1121,7 @@
         menu_soccer: 'Fussball',
         menu_about: 'Über Genc',
         cta: 'Kontaktiere mich',
+        scroll_hint: 'Scrollen',
         hero_headline: 'Dein Körper.<br>Dein Gym.',
         hero_body: 'Massgeschneidertes Training, Physio &amp; Massage.<br>Schweizer Präzision, direkt zu dir.',
         training_headline: 'Dein Gym<br>kommt zu dir.',
@@ -1124,7 +1153,7 @@
         wa_text: 'Hallo%20Genc%2C%20ich%20m%C3%B6chte%20gerne%20mehr%20%C3%BCber%20deine%20Services%20erfahren.',
       },
       ar: {
-        page_title: 'جينك كراسنيكي — جسدك. صالتك الرياضية.',
+        page_title: 'جينك كراسنيكي — مدرب شخصي وأخصائي علاج طبيعي في دبي',
         meta_desc: 'تدريب شخصي وعلاج طبيعي وتدليك بمعايير سويسرية — يصل إلى باب منزلك في دبي.',
         menu_training: 'التدريب',
         menu_virtual: 'افتراضي',
@@ -1133,6 +1162,7 @@
         menu_soccer: 'كرة القدم',
         menu_about: 'عن جينك',
         cta: 'تواصل معي',
+        scroll_hint: 'مرّر للأسفل',
         hero_headline: 'جسدك.<br>صالتك الرياضية.',
         hero_body: 'تدريب وعلاج طبيعي وتدليك مُصمَّم خصيصاً لك.<br>دقّة سويسرية، تصل إلى باب منزلك.',
         training_headline: 'صالتك الرياضية<br>تأتي إليك.',
