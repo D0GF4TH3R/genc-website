@@ -25,7 +25,7 @@ genc-website/
 ├── index.html          ← THE file. All CSS, JS, HTML, i18n, legal pages.
 ├── GK_Logo.png         ← 852×178, PNG wordmark "⊙ ELITE TRAINING" (black on alpha), 15 KB
 ├── about-genc.webp     ← 1232×2000 About-section graphic (photo + stat grid); also Schema image
-├── og-image.jpg        ← 1200×630 link-preview / social share card (Genc + logo + tagline)
+├── og-image-v2.jpg     ← 1200×630 link-preview / social share card ("Personal Training & Recovery"). Dateiname bei Textänderung hochzählen — WhatsApp/Facebook cachen die URL dauerhaft.
 ├── favicon.ico         ← multi-res 16/32/48, GK monogram white on green tile
 ├── favicon-32x32.png / favicon-16x16.png  ← PNG favicons
 ├── apple-touch-icon.png ← 180×180 iOS home-screen icon (green square)
