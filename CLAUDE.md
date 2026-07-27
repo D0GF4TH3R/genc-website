@@ -140,7 +140,7 @@ Impressum and Datenschutz/Privacy Policy are **fullscreen modals** rendered from
 - **Firma aufgelöst** (dissolved end of January 2026) — NO Handelsregister entry in Impressum
 - **Standort:** Dubai, United Arab Emirates / Dubai, Vereinigte Arabische Emirate
 - **Email:** genc@gkelite.training
-- **WhatsApp:** +41 76 568 77 07
+- **Telefon / WhatsApp:** +971 50 269 7738 (Dubai, seit Juli 2026 — ersetzt die alte CH-Nummer)
 - **Hosting:** Cloudflare Pages (named in Datenschutz/Privacy hosting clause)
 - **No cookies, no tracking, no analytics** — Datenschutz is very simple
 
@@ -164,7 +164,7 @@ Safari iOS dynamically changes `dvh` when the toolbar animates — causes canvas
 
 - **Nav:** GK_Logo.png (34px mobile, 38px desktop) left, glassmorphism hamburger right. Fixed, z-index 200.
 - **Hamburger menu:** Fullscreen glassmorphism overlay. Links jump to END of each section's spacer (`offsetTop + offsetHeight - 2`), not the beginning — this ensures correct text/frame alignment due to the text delay system.
-- **WhatsApp button:** Fixed bottom-right, green (#2D6A4F), links to `wa.me/41765687707`.
+- **WhatsApp button:** Fixed bottom-right, green (#2D6A4F), links to `wa.me/971502697738`.
 - **Scroll indicator:** Chevron at bottom, appears 600ms after hero autoplay, disappears on first scroll.
 - **Loading screen:** GK logo + thin green progress bar + percentage.
 
@@ -187,7 +187,7 @@ All conversion goes through WhatsApp. No forms, no chatbot, no email forms.
 
 **WhatsApp link format:**
 ```
-https://wa.me/41765687707?text=[URL-encoded message]
+https://wa.me/971502697738?text=[URL-encoded message]
 ```
 
 The message text changes with language. All WhatsApp links have the class `.wa-link` and are updated by `setLang()`.
